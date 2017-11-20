@@ -1,7 +1,16 @@
 %every chapter wil be split into a new document. For the sake of the structure, this one_doc strategy is held up
 \chapter{Application Area and Goals}
 \label{cha:area_goals}
-\section{Introduction}
+\section{Problem Statement}
+Already well before new movies are being produced, every stakeholder certainly is interested in the monetary success of the given movie. In order to predict the success costly methods are being applied, such as market investigations. \textcolor{red}{\textit{Do we need a source? koennte noch ausgefuehrt werden.}}
+
+The benefit Data Mining brings to the analysis of large datasets, can also be transferred onto the stated problem of predicting a movie's success. Based on given data of already released movies, a model is being learned which shall be applied on upcoming or planned movies. In order to learn and apply the model various pieces of information are taken into account. Just a few are budget, revenues, runtime, genre and information on the release. Information on the dataset and on all preprocessing methods which were applied will be provided in chapter \ref{cha:data_selection}.
+
+\section{Goals}
+The goal of this project is to learn a model which will predict how successful a not yet released movie will be. This is done by using common data mining techniques in Python. As a main objective the question \textit{"Based on revenue, will the movie be popular or will it be a flop?"} shall be answered for all possible combinations of information on a new movie as precisely as possible.
+In order to be as precisely as possible, not only different algorithms are tested, but also parameter tuning is applied with different performance measures \footnote{Further information on applied techniques and evaluation methods is provided in chapter \ref{cha:data_mining}}.
+
+
 \begin{itemize}
 	\item Problem Statement and idea behind the project
 	\item General introduction similar to Project outline
@@ -13,6 +22,13 @@
 	\item roughly 1 Page
 \end{itemize}
 \includegraphics[width=\textwidth]{images/DM_Process.png}
+
+
+
+
+
+
+
 
 
 
@@ -29,7 +45,7 @@
 	\end{itemize}
 	\item Exploration
 	\begin{itemize}
-		\item Get an intitial understanding of the data
+		\item Get an initial understanding of the data
 		\item Calculate basic summarization statistics
 		\item Visualize the data
 		\item Identify data problems such as outliers, missing values, duplicate records
@@ -57,6 +73,13 @@
 	\item Good data preparation is key to producing valid and reliable models
 	\item Data preparation estimated to take 70-80\% of the time and effort of a data mining project!
 \end{itemize}
+
+\section{A list of problems we encountered}
+\begin{enumerate}
+	\item \textbf{list further problems we had and solved!}
+	\item Prod. Comp.: Same prod. company named differently -> using Regex to solve (Steffen)
+	\item dataset: 5 datasets have duplicates
+\end{enumerate}
 
 
 
