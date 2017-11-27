@@ -1,0 +1,37 @@
+\chapter{Preprocessing and Transformation}
+\label{cha:preprocessing_transformation}
+
+In order to pick out columns that have a significant impact on forecasting a movie's success, the following assumptions concerning the importance of information in the metadata were made:
+\begin{itemize}
+	\item The budget and revenue are crucial numbers.
+	\item The release year has an impact on numbers such as budget and revenue.
+	\item The genre, the production company and the runtime are important information.
+\end{itemize}
+
+\begin{itemize}
+	\item Transform data into a representation that is suitable for the chosen data mining methods
+	\begin{itemize}
+		\item number of dimensions
+		\item scales of attributes (nominal, ordinal, numeric)
+		\item amount of data (determines hardware requirements)
+	\end{itemize}
+	\item Methods
+	\begin{itemize}
+		\item Aggregation, sampling
+		\item Dimensionality reduction / feature subset selection
+		\item Attribute transformation / text to term vector
+		\item Discretization and binarization
+	\end{itemize}
+	\item Good data preparation is key to producing valid and reliable models
+	\item Data preparation estimated to take 70-80\% of the time and effort of a data mining project!
+\end{itemize}
+
+
+\section{Preprocessing steps according to Python script}
+
+\section{A list of problems we encountered}
+\begin{enumerate}
+	\item \textbf{list further problems we had and solved!}
+	\item Prod. Comp.: Same prod. company named differently -> using Regex to solve (Steffen)
+	\item dataset: 5 datasets have duplicates
+\end{enumerate}
