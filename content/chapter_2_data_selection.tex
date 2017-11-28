@@ -11,33 +11,16 @@ The selected dataset onto which a classification model shall be learned is provi
 
 %Due to the multitude of attributes, it is essential to extract the relevant values for the implementation of a well-functioning classifier. Many values have no effect on the financial success of a movie and can therefore be ignored. This includes, for example, the columns...
 
-The structure of the data attributes varies. String, Float values, List of JSON objects. All of those values need special treatment in preprocessing. More later on.
+The structure of the individual attributes is very different. In addition to boolean values, strings and numeric float values (e.g \textit{budget} or \textit{runtime}), many attributes contain longer texts (e.g \textit{overview}), arrays or even a list of JSON objects (e.g.\textit{production-countries} )These different formats must be taken into account in the later preprocessing step and need to be processed individually, so that a well-functioning classification model can be worked out.
 
 
 \section{Basic data exploration}
-Taking a deeper look at the data. Quality varies vary much. String values oftentimes missing, encoded wrong. Especially for older movies a lot of data is missing. For numerical values no info about currency. Complicated because later computations will rely heavily on revenue and budget data. Diving deeper into those can see a lot of values are missing or containing zero (get the number from pandas). Must be taken into account for preprocessing. Average budget value, average revenue (without zero). Correlation between revenue and budget. The most common genre is... . Average number of actors per movie.
+If you take a closer look at the data it can be noticed that the overall quality varies significantly. This can be attributed to the fact that the record is maintained by a community and is not provided by a larger organization or company. Therefore, a demanding quality assurance process is difficult to realize. One  quality issue and special case is for example the encoding of string attributes of Asian movies and the Chinese and Japanese character set. Another aspect of importance is the absence of a lot of values. Especially for older movies (before 1960) there are just a few information available. This lack of information needs to be taken into account for the further steps. The most critical effect has the absence of values to numerical attributes like \textit{revenue} or \textit{budget}, which are also critical for the success of a classification model with respect to financial interests. Here around 34000 records are containing a zero or nothing in either the revenue or the budget column, what decimates the dataset heavily. 
+
+In addition to that, there is no information about the currencies of financial attributes. Complicated because later computations will rely heavily on revenue and budget data. Average budget value, average revenue (without zero). Correlation between revenue and budget. The most common genre is... . Average number of actors per movie.
 
 Back to revenue and budget take into account that this is data from past 60 years. A lot of things changed in movie economics (prices, consumer Verhalten, globalization). Introduced new column, productivity value
 A lot of values are scaled wrongly. Little example with 2 movies. 2000000 in revenue is just stated as 2, don't know the scale of data. Will be a big problem
 
-\begin{itemize}
-	\item In slides named: "structure and size of data"
-	\item min. 1 Page
-	\item Selection: 
-	\begin{itemize}
-		\item What data is available?
-		\item What do I know about the provenance of the data?
-		\item What do I know about the quality of the data?
-		\item Wrong values, lot of null values
-	\end{itemize}
-	\item Exploration
-	\begin{itemize}
-		\item Get an initial understanding of the data
-		\item Calculate basic summarization statistics
-		\item Visualize the data
-		\item Identify data problems such as outliers, missing values, duplicate records
-		\item problem with number scales, data formats, truth of contents
-	\end{itemize}
-\end{itemize}
 
 Main issue quality of data. Further explained in preprocessing...
