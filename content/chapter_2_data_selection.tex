@@ -1,10 +1,17 @@
 \chapter{Data Selection}
 \label{cha:data_selection}
-The selected dataset onto which a classification model shall be learned is provided by Kaggle \footnote{2017 Kaggle Inc}. It is named \textit{The movies Dataset}\footnote{Link to the dataset: \hyperref[https://www.kaggle.com/rounakbanik/the-movies-dataset]{https://www.kaggle.com/rounakbanik/the-movies-dataset}} and contains metadata on approximately 45,000 movies in its raw format. It is provided and updated by Rounik Banik. The complete dataset consits out of several files in the \textit{.csv} format containing specific info about movie casts, and external score. For the outcome of this project the central file, used for further preprocessing is named \textit{movies-metadata.csv}. This csv-file holds 24 columns in total, which can be expected in the graphic below.\\\\
-\includegraphics[width=\textwidth]{images/Raw_dataset_headers.png}
-Untertitel bla bla
 
 \section{Structure and size of data}
+The selected dataset onto which a classification model shall be learned is provided by Kaggle \footnote{2017 Kaggle Inc}. It is named \textit{The movies Dataset}\footnote{Link to the dataset: \hyperref[https://www.kaggle.com/rounakbanik/the-movies-dataset]{https://www.kaggle.com/rounakbanik/the-movies-dataset}} and contains metadata on approximately 45,000 movies in its raw format. It is provided and updated by Rounik Banik. The complete dataset consits out of several files in the \textit{.csv} format containing specific info about movie casts, and external scores. For the outcome of this project the central file, used for further preprocessing is named \textit{movies-metadata.csv}. This csv-file holds 24 columns in total, which can be expected in the graphic below.
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=\textwidth]{images/Raw_dataset_headers.png}
+	\caption{Columns of the file \textit{movies-metadata.csv}}
+\end{figure}
+
+%Due to the multitude of attributes, it is essential to extract the relevant values for the implementation of a well-functioning classifier. Many values have no effect on the financial success of a movie and can therefore be ignored. This includes, for example, the columns...
+
+
 
 \section{Basic data exploration}
 
