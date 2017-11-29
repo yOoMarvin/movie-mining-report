@@ -1,22 +1,7 @@
 \chapter{Data Mining}
 \label{cha:data_mining}
-\begin{itemize}
-	\item Input: Preprocessed Data
-	\item Output: Model / Patterns
-\end{itemize}
 
-\begin{enumerate}
-	\item Apply data mining method
-	\item Evaluate resulting model / patterns (using P, R, F1, not accuracy)
-	\item Iterate:
-	\begin{itemize}
-		\item Experiment with different parameter settings
-		\item Experiment with different alternative methods – Improve preprocessing and feature generation – Combine different methods
-	\end{itemize}
-\end{enumerate}
-
-\section{Algorithms}
-To predict the success of a movie different Algorithms were used:
+After preprocessing the data, the next step is to build a classifier to predict the success of a movie. To find the best classifier a set of different algorithms is evaluated:
 \begin{itemize}
 	\item K-Nearest Neighbor
 	\item Naive Bayes
@@ -26,18 +11,21 @@ To predict the success of a movie different Algorithms were used:
 	\item \textbf{Random Forest}
 \end{itemize}
 
-The following analysis concentrates on the three algorithms with the best results: Random Forest, Decision Tree and Support Vector Classifier.
-The first goal of the analysis was to predict the success in five different classes. Since an analysis in that detail with the given data set is very unprecise as seen in table \ref{tab:multi_classifier}, an binary classifier was created. To find the best parameter setting , a gridsearch in combination with a ten-fold cross-validation, scoring the highest F1-score, was applied for each of the classifier.
-The achieved F1-scores of the three binary classifier are listed in table \ref{tab:binary_classifier}. At first the classifier were scoring the micro F1-score. Even though the results look promising at the beginning, the classifier were mostly guessing the majority class in this setting. For that reason every classifier was also scored on the macro F1-score, which led to a worse score.
+%The following analysis concentrates on the three algorithms with the best results: Random Forest, Decision Tree and Support Vector Classifier.
+The first goal of the analysis was to predict the success in five different classes. Since an analysis in that detail with the given data set is very unprecise as seen in table \ref{tab:multi_classifier}, a binary classifier was created.
+For all of the named algorithms an individual feature selection is applied to get the best results. The important features are selected by a greedy feature wrapper. This feature wrapper starts with the full set of features and drops features as long as the result improves. The results are checked with a ten fold cross-validation. Additionally to the selection of features with the feature wrapper, filters for features like the number of actors and number of production companies can be applied, to only use x\% most occurring of them. \\
+In the next step some hyperparameter tuning is needed to improve the classifiers. To find the best parameter setting, a gridsearch in combination with a ten-fold cross-validation, scoring the highest F1-score (macro), is applied to the classifiers.
+The achieved F1-scores of the three best binary classifier are listed in table \ref{tab:binary_classifier}. 
+At first the classifiers are scoring the micro F1-score. Even though the result looks promising at the beginning, the classifier are mostly guessing the majority class in this setting. For that reason every classifier is scoring on the macro F1-score. Since the data set for the binary classifier is unbalanced with a ratio of 76\% "successful" and 24\% "unsuccessful", the next step to improve the classifiers is to balance the train set. That for the stratified cross validation is used to balance the train set. For further improvement the data set can be downbalanced by shrinking the majority class of the train set to the size of the minority class. But since the data set is quite small already after the preprocessing, the downsampling worsens the classifiers. To not shrink the dataset any further upsampling can be used to increase the minority class of the train set to the size of the majority class. In the following section the decision tree, random forest and the support vector classifier are examined in more detail.
 
 \begin{center}
 \begin{table}
-	\begin{tabular}{ | p{3.5cm} | p{1.5cm} | p{1.5cm} | p{2cm} | p{2cm} |}
+	\begin{tabular}{ | p{3.5cm} | p{1.5cm} |}
     \hline
-    Algorithm & F1 Macro & F1 Micro \\ \hline
-    Decision Tree & 36.2\% & 38.6\%  \\ \hline
-    Random Forest & 40.4\% & 43.4\%  \\ \hline
-    Support Vector Classifier & 37.5\% & 39.1\% \\
+    Algorithm & F1 Macro \\ \hline
+    Decision Tree & 36.2\% \\ \hline
+    Random Forest & 40.4\% \\ \hline
+    Support Vector Classifier & 37.5\% \\
     \hline
     \end{tabular}
     \caption{Multi Label Classifier Results} 
@@ -60,22 +48,11 @@ The achieved F1-scores of the three binary classifier are listed in table \ref{t
 \end{table}
 \end{center}
 
-\subsection{Decision Tree}
-Regarding the binary classifier, predicting if a movie is going to be a success, the data set is unbalanced with a proximate ratio of 75\% "successful" and 25\% "unsuccessful". Most of the classifier give bad results with unbalanced data sets. But especially tree-structures can handle unbalanced data sets well, since the hierarchical structure allows them to learn signals from both classes.
-But even with a hierarchical structure the algorithm was still just predicting the majority class, while scoring an micro F1 score, as seen in table \ref{tab:binary_classifier}. Since the macro F1 score does not that promising, downsampling was used in the next step to improve the prediction.
-Tuples of the majority class were removed to have a balance of 50/50.
-Since the downsampled data set is probably too small to learn a good classifier, the next step to improve the algorithm is to upsample the data set. WRITE REST FOR UPSAMPLING HERE
+\section{Decision Tree}
+One way to deal with problem of an unbalanced data set is to use a tree-structured classifier, since the hierarchical structure allows them to learn signals from both classes.
+To find the best parameter setting for the decision tree the gridsearch tests the parameters splitcriterion, max depth, minimum samples to split and the class weight. After dropping the "quarter", "runtime" and "adult" columns, the classifier scores without any sampling, no class weight, an entropy split criterion and a max depth of 100 an F1 score of 58\%. Both the down- and the upsampling worsens the classifier.
 
-\subsection{Random Forest}
-Random Forest builds like the decision tree a hierarchical structure, which can handle unbalanced data sets better than other algorithms. In addition it corrects the overfitting habit of a decision tree. In the gridsearch hyperparameters like the split-criterion, number of features, the minimum sample to split and whether bootstrap samples are used or not are evaluated.
-With an downsampled data set the algorithm scored an F1 score micro of 80.6\%, which is an improvement of more than 18\% compared to the decision tree.
-SOMETHING ABOUT UPSAMPLING HERE:
+\section{Random Forest}
+Like the decision tree, random forest builds  a hierarchical structure, which can handle unbalanced data sets better than other algorithms. In addition it corrects the overfitting habit of a decision tree. In the gridsearch hyperparameters like the split-criterion, number of features, the minimum sample to split and whether bootstrap samples are used or not are evaluated. After dropping the actors and the release quarter, the classifiers scores a F1 score of 59\%. As with the decision tree neither down- nor upsampling the train set improves the result.
 
-\subsection{Support Vector Classifier}
-
-\section{Three best performing algorithms}
-\begin{itemize}
-	\item Pick best three algos
-	\item GridSearch
-	\item Why does each classifier perform how it performs (unausgeglichene Klassen, ...)?
-\end{itemize}
+\section{Support Vector Classifier}
