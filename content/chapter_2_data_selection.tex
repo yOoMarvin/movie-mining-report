@@ -2,11 +2,11 @@
 \label{cha:data_selection}
 
 \section{Structure and size of data}
-The selected dataset onto which a classification model shall be learned is provided by Kaggle \footnote{2017 Kaggle Inc}. It is named \textit{The movies Dataset}\footnote{Link to the dataset: \hyperref[https://www.kaggle.com/rounakbanik/the-movies-dataset]{https://www.kaggle.com/rounakbanik/the-movies-dataset}} and contains metadata on approximately 45,000 movies in its raw format. It is provided and updated by Rounik Banik. The complete dataset consits out of several files in the \textit{.csv} format containing specific info about movie casts, metadata, and external scores. For the outcome of this project the central file, used for further preprocessing is named \textit{movies-metadata.csv}. This csv-file holds 24 columns in total, which can be expected in the graphic below.
+The selected dataset onto which a classification model shall be learned is provided by Kaggle \footnote{2017 Kaggle Inc}. It is named \textit{The movies Dataset}\footnote{Link to the dataset: \hyperref[https://www.kaggle.com/rounakbanik/the-movies-dataset]{https://www.kaggle.com/rounakbanik/the-movies-dataset}} and contains metadata on approximately 45,000 movies in its raw format. It is provided and updated by Rounik Banik. The complete dataset consists out of several files in the \textit{.csv} format containing specific info about movie casts, metadata, and external scores. For the outcome of this project the central file, used for further preprocessing is named \textit{movies-metadata.csv}. This csv-file holds 24 columns in total, which can be expected in the graphic below.
 \begin{figure}[ht]
-	\centering
-		\includegraphics[width=\textwidth]{images/Raw_dataset_headers.png}
-	\caption{Columns of the file \textit{movies-metadata.csv}}
+    \centering
+        \includegraphics[width=\textwidth]{images/Raw_dataset_headers.png}
+    \caption{Columns of the file \textit{movies-metadata.csv}}
 \end{figure}
 
 %Due to the multitude of attributes, it is essential to extract the relevant values for the implementation of a well-functioning classifier. Many values have no effect on the financial success of a movie and can therefore be ignored. This includes, for example, the columns...
@@ -22,16 +22,16 @@ In addition to that, there is no information about the currencies of numerical f
 Speaking of those issues it is also worth mentioning that the chosen dataset contains movie metadata from the past 60 years. With respect to todays economics a lot of things changed in movie production and also consumption. Aspects that have influenced movie economics are for example price structures and globalization, but also consumer behavior changed a lot. Therefore it was decided to introduce a new attribute to the dataset, which will be called \textit{productivity}. This value should describe the ratio between the revenue and the budget of the movie. More detailed explanation on this value can be found in chapter \ref{cha:preprocessing_transformation}. 
 \\
 
-To get a better understanding of the data and its relations a few examinations where taken and are presented in the table below.
+To get a better understanding of the data and its relations a few examinations were taken and are presented in the table below.
 \begin{center}
-	\begin{tabular}{| l | l |}
-	\hline
-	Average budget & \$ 31.662.585 \\ \hline
-	Average revenue & \$ 92.059.210 \\ \hline
-	Average productivity rate & 2.8 \\ \hline
-	3 Most common genres & Drama, Comedy, Thriller \\ \hline
-	Average runtime & 94 min \\ \hline
-	\end{tabular}
+    \begin{tabular}{| l | l |}
+    \hline
+    Average budget & \$ 31.662.585 \\ \hline
+    Average revenue & \$ 92.059.210 \\ \hline
+    Average productivity rate & 2.8 \\ \hline
+    3 Most common genres & Drama, Comedy, Thriller \\ \hline
+    Average runtime & 94 min \\ \hline
+    \end{tabular}
 \end{center} 
 
 \textbf{Add more? Plots? Which make sense?}
