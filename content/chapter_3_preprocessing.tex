@@ -13,7 +13,7 @@ After this, the dataset shrunk to roughly 4000 rows. To retain some numbers and 
 \section{Horizontal scaling}
 Based on the assumptions that budget and revenue were crucial numbers, also other features have been selected for the modeling. A special focus has been placed on the following datacolumns: the release year, the genre, the production country as well as the production company, the spoken languages, the runtime and the fact whether a movie belongs to a collection or not. Due to high encoding effort for these features, further columns are not taken into account during this project. Figure \ref{img:mm_columns} gives an overview on which information was retained.
 
-The reason why information, which could have been potentially interesting, had to be dropped, was mainly for time reasons. Preprocessing took about 70\% of the timeperiod\footnote{Mainly due to the fact that heaps of problems arose from the dataset, which can be read in chapter \ref{cha:data_selection}.} of the whole project. Thus, the team was able to focus on preprocessing of mentioned columns. Still, chapter \ref{cha:prospect} provides a prospect, which steps were possible, if a larger time frame was dedicated to this project.
+The reason why information, which could have been potentially interesting, had to be dropped, was mainly for time reasons. Preprocessing took about 70\% of the timeperiod\footnote{Mainly due to the fact that heaps of problems arose from the dataset, which can be read in chapter \ref{cha:data_selection}.} of the whole project. Thus, the team was able to focus on preprocessing of mentioned columns. Still, chapter \ref{cha:data_selection} provides a prospect, which steps were possible, if a larger time frame was dedicated to this project.
 
 After dropping out information, eleven columns remained. Combined with the two columns from the \textit{credits.csv} dataset, thirteen columns were used as a basis to create features for finding the best performing classifiers.
 
@@ -23,7 +23,7 @@ In order to transform the data into a suitable representation for forecasting a 
 \textit{Merging of columns, discretization (binning) of features, extracting information out of columns, one hot encoding normalizing.}
 \end{minipage}}
 \\ \\
-The following sections explain the preprocessing in detail and provide Python code-snippets. Figure \ref{img:features} shows precisely, which operations were executed on each column and how the data types changed.
+The following sections explain the preprocessing in detail. Figure \ref{img:features} shows precisely, which operations were executed on each column and how the data types changed.
 
 
 \section{Merging and creating columns}
