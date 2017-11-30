@@ -13,7 +13,7 @@ After this, the dataset shrunk to roughly 4000 rows. To retain some numbers and 
 \section{Horizontal scaling}
 Based on the assumptions that budget and revenue were crucial numbers, also other features have been selected for the modeling. A special focus has been placed on the following datacolumns: the release year, the genre, the production country as well as the production company, the spoken languages, the runtime and the fact whether a movie belongs to a collection or not. Due to high encoding effort for these features, further columns are not taken into account during this project. Figure \ref{img:mm_columns} gives an overview on which information was retained.
 
-The reason why information, which could have been potentially interesting, had to be dropped, was mainly for time reasons. Preprocessing took about 70\% of the timeperiod\footnote{Mainly due to the fact that heaps of problems arose from the dataset, which can be read in chapter \ref{cha:data_selection}.} of the whole project. Thus, the team was able to focus on preprocessing of mentioned columns. Still, chapter \ref{cha:data_mining} provides a prospect, which steps were possible, if a larger time frame was dedicated to this project.
+The reason why information, which could have been potentially interesting, had to be dropped, was mainly for time reasons. Preprocessing took about 70\% of the timeperiod\footnote{Mainly due to the fact that heaps of problems arose from the dataset, which can be read in chapter \ref{cha:data_selection}.} of the whole project. Thus, the team was able to focus on preprocessing of mentioned columns. Still, chapter \ref{cha:prospect} provides a prospect, which steps were possible, if a larger time frame was dedicated to this project.
 
 After dropping out information, eleven columns remained. Combined with the two columns from the \textit{credits.csv} dataset, thirteen columns were used as a basis to create features for finding the best performing classifiers.
 
@@ -34,7 +34,7 @@ The following sections explain the preprocessing in detail and provide Python co
 When a new movie is planned, the finances are one of the most important concerns. Where the budget can be circumscribed upfront, revenue is nearly impossible to guess. As a result, the prediction of a model should consider the revenue as a key factor for it's monetary success. To only predict the revenue (using multiple bins or binary binning, like e.g. "will the revenue of a new movie be higher or lower than \$500,000?") would not have worked out due to multiple reasons: Both the revenue and budget of a movie in earlier years, like e.g. the 1950's, was
 \begin{wrapfigure}{l}{0.7\textwidth}
 	\includegraphics[width=0.7\textwidth]{images/3_metadata_columns.png}
-	\caption{Remained columns of \textit{movies\_metadata.csv} are marked in yellow}
+	\caption{Remained columns of \textit{movies\_metadata.csv} are highlighted in yellow}
 	\label{img:mm_columns}
 \end{wrapfigure}
 \FloatBarrier
