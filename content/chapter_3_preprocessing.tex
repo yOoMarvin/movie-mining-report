@@ -7,13 +7,13 @@ In total, two datasets were used to create features for testing the different cl
 \section{Vertical scaling}
 Both dimensions for the dataset \textit{movies\_metadata.csv} were processed. As section \ref{sec:merge_create} explains, the revenue and budget played a major role for the data mining task. Therefore all datasets without information on each column had to be dropped out, which was a major part of the dataset. Also duplicates were identified using the ID and discarded. 
  
-After this, the dataset shrunk to roughly 4000 rows. To retain some numbers and still use datasets which had only missing out revenue or budget two approaches were implemented: A parser for the IMDB database \footnote{
-\hyperref{http://www.imdb.com/}{external_sources}{ref:IMDB}{The IMDB database: http://www.imdb.com/}} API and for the The Numbers\footnote{\hyperref{http://www.the-numbers.com/research-analysis}{external_sources}{ref:numbers}{the numbers website: http://www.the-numbers.com/research-analysis}} API was programmed and run. With these approaches it was possible to gain the real values of budget and revenue for the dataset. By mining two of the most reliable movie-datasources out in the web, it was also possible to determine rows, which used foreign currency values in their revenue or only revenue based on the local market (e.g. only in the US)
+After this, the dataset shrunk to roughly 4000 rows. To retain some numbers and still use datasets which had only missing out revenue or budget two approaches were implemented: A parser for the IMDB database\footnote{
+\hyperref{http://www.imdb.com/}{external_sources}{ref:IMDB}{The IMDB database: http://www.imdb.com/}} API and for the The Numbers\footnote{\hyperref{http://www.the-numbers.com/research-analysis}{external_sources}{ref:numbers}{the numbers website: http://www.the-numbers.com/research-analysis}} API was programmed and run. With these approaches it was possible to gain the real values of budget and revenue for the dataset. By mining two of the most reliable movie-datasources out in the web, it was also possible to determine rows, which used foreign currency values in their revenue or only revenue based on the local market (e.g. only in the US).
 
 \section{Horizontal scaling}
 Based on the assumptions that budget and revenue were crucial numbers, also other features have been selected for the modeling. A special focus has been placed on the following datacolumns: the release year, the genre, the production country as well as the production company, the spoken languages, the runtime and the fact whether a movie belongs to a collection or not. Due to high encoding effort for these features, further columns are not taken into account during this project. Figure \ref{img:mm_columns} gives an overview on which information was retained.
 
-The reason why information, which could have been potentially interesting, had to be dropped, was mainly for time reasons. Preprocessing took about 70\% of the timeperiod\footnote{Mainly due to the fact that heaps of problems arose from the dataset, which can be read in chapter \ref{cha:data_selection}.} of the whole project. Thus, the team was able to focus on preprocessing of mentioned columns. Still, chapter \ref{cha:interpretation_evaluation} provides a prospect, which steps were possible, if a larger timeframe was dedicated to this project.
+The reason why information, which could have been potentially interesting, had to be dropped, was mainly for time reasons. Preprocessing took about 70\% of the timeperiod\footnote{Mainly due to the fact that heaps of problems arose from the dataset, which can be read in chapter \ref{cha:data_selection}.} of the whole project. Thus, the team was able to focus on preprocessing of mentioned columns. Still, chapter \ref{cha:data_mining} provides a prospect, which steps were possible, if a larger time frame was dedicated to this project.
 
 After dropping out information, eleven columns remained. Combined with the two columns from the \textit{credits.csv} dataset, thirteen columns were used as a basis to create features for finding the best performing classifiers.
 
@@ -29,14 +29,18 @@ The following sections explain the preprocessing in detail and provide Python co
 \section{Merging and creating columns}
 \label{sec:merge_create}
 
+
+
 When a new movie is planned, the finances are one of the most important concerns. Where the budget can be circumscribed upfront, revenue is nearly impossible to guess. As a result, the prediction of a model should consider the revenue as a key factor for it's monetary success. To only predict the revenue (using multiple bins or binary binning, like e.g. "will the revenue of a new movie be higher or lower than \$500,000?") would not have worked out due to multiple reasons: Both the revenue and budget of a movie in earlier years, like e.g. the 1950's, was
 \begin{wrapfigure}{l}{0.7\textwidth}
 	\includegraphics[width=0.7\textwidth]{images/3_metadata_columns.png}
-	\caption{Dropped columns of \textit{movies\_metadata.csv}. All retained columns are marked in yellow}
+	\caption{Remained columns of \textit{movies\_metadata.csv} are marked in yellow}
 	\label{img:mm_columns}
 \end{wrapfigure}
 \FloatBarrier
- considerably less than today, so total numbers are not comparable. Additionally, inflation plays a role in comparing financial numbers of elder movies to newer ones. Furthermore, the dataset contained different currencies like dollars, euros or indian rupees without indicating which currency was provided per dataset. This is why a new column was added, namely the productivity. It is a quotient, computed by dividing revenue through budget. If the productivity is higher than one, the movie derives profit, if the productivity is less than one, the movie derives a loss. That way, above mentioned issues can be avoided. The column revenue was dropped afterwards.
+ considerably less than today, so total numbers are not comparable. Additionally, inflation plays a role in comparing financial numbers of elder movies to newer ones. Furthermore, the dataset contained different currencies like dollars, euros or indian rupees without indicating which currency was provided per dataset.
+ 
+As described in chapter \ref{sec:data_exploration}, a new column had to be introduced, namely the productivity. It is a quotient, computed by dividing revenue through budget. If the productivity is higher than one, the movie derives profit, if the productivity is less than one, the movie derives a loss. That way, above mentioned issues can be avoided. The column revenue was dropped afterwards.
 
 Considering the release date of a movie, the assumption was made that the demand for movies is higher in quarter four of the year (time of winter and christmas). This was confirmed by checking the numbers\footnote{Check for details on revenues in video-selling: \hyperref{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}{link}{Statista revenue movies}{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}}. Hence, a new column of numeric type with quarter one to four was created. The previous column release date was converted to release year only as a numeric format.
 
@@ -78,9 +82,9 @@ During the preprocessing of the data, a lot of new columns have been generated d
 %	\item Data preparation estimated to take 70-80\% of the time and effort of a data mining project!
 %\end{itemize}
 
-\section{A list of problems we encountered}
-\begin{enumerate}
-	\item \textbf{list further problems we had and solved!}
-	\item Prod. Comp.: Same prod. company named differently -> using Regex to solve (Steffen)
-	\item dataset: 5 datasets have duplicates
-\end{enumerate}
+%\section{A list of problems we encountered}
+%\begin{enumerate}
+%	\item \textbf{list further problems we had and solved!}
+%	\item Prod. Comp.: Same prod. company named differently -> using Regex to solve (Steffen)
+%	\item dataset: 5 datasets have duplicates
+%\end{enumerate}
