@@ -17,22 +17,26 @@ The reason why information, which could have been potentially interesting, had t
 
 After dropping out information, eleven columns remained. Combined with the two columns from the \textit{credits.csv} dataset, thirteen columns were used as a basis to create features for finding the best performing classifiers.
 
-In order to transform the data into a suitable representation for forecasting a movie's success, preprocessing was mandatory. For each column zero or more preprocessing steps from the following list were performed:\\
+In order to transform the data into a suitable representation for forecasting a movie's success, preprocessing was mandatory. For each column zero or more preprocessing steps from the following list were performed:
+\\ \\
 \fbox{\begin{minipage}{\textwidth}
-Merging of columns, discretization (binning) of features, extracting information out of columns, one hot encoding normalizing.
-\end{minipage}}\\
+\textit{Merging of columns, discretization (binning) of features, extracting information out of columns, one hot encoding normalizing.}
+\end{minipage}}
+\\ \\
 The following sections explain the preprocessing in detail and provide Python code-snippets. Figure \ref{img:features} shows precisely, which operations were executed on each column and how the data types changed.
 
+
+\section{Merging and creating columns}
+\label{sec:merge_create}
+
+When a new movie is planned, the finances are one of the most important concerns. Where the budget can be circumscribed upfront, revenue is nearly impossible to guess. As a result, the prediction of a model should consider the revenue as a key factor for it's monetary success. To only predict the revenue (using multiple bins or binary binning, like e.g. "will the revenue of a new movie be higher or lower than \$500,000?") would not have worked out due to multiple reasons: Both the revenue and budget of a movie in earlier years, like e.g. the 1950's, was
 \begin{wrapfigure}{l}{0.7\textwidth}
 	\includegraphics[width=0.7\textwidth]{images/3_metadata_columns.png}
 	\caption{Dropped columns of \textit{movies\_metadata.csv}. All retained columns are marked in yellow}
 	\label{img:mm_columns}
 \end{wrapfigure}
 \FloatBarrier
-
-\section{Merging and creating columns}
-\label{sec:merge_create}
-When a new movie is planned, the finances are one of the most important concerns. Where the budget can be circumscribed upfront, revenue is nearly impossible to guess. As a result, the prediction of a model should consider the revenue as a key factor for it's monetary success. To only predict the revenue (using multiple bins or binary binning, like e.g. "will the revenue of a new movie be higher or lower than \$500,000?") would not have worked out due to multiple reasons: Both the revenue and budget of a movie in earlier years, like e.g. the 1950's, was considerably less than today, so total numbers are not comparable. Additionally, inflation plays a role in comparing financial numbers of elder movies to newer ones. Furthermore, the dataset contained different currencies like dollars, euros or indian rupees without indicating which currency was provided per dataset. This is why a new column was added, namely the productivity. It is a quotient, computed by dividing revenue through budget. If the productivity is higher than one, the movie derives profit, if the productivity is less than one, the movie derives a loss. That way, above mentioned issues can be avoided. The column revenue was dropped afterwards.
+ considerably less than today, so total numbers are not comparable. Additionally, inflation plays a role in comparing financial numbers of elder movies to newer ones. Furthermore, the dataset contained different currencies like dollars, euros or indian rupees without indicating which currency was provided per dataset. This is why a new column was added, namely the productivity. It is a quotient, computed by dividing revenue through budget. If the productivity is higher than one, the movie derives profit, if the productivity is less than one, the movie derives a loss. That way, above mentioned issues can be avoided. The column revenue was dropped afterwards.
 
 Considering the release date of a movie, the assumption was made that the demand for movies is higher in quarter four of the year (time of winter and christmas). This was confirmed by checking the numbers\footnote{Check for details on revenues in video-selling: \hyperref{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}{link}{Statista revenue movies}{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}}. Hence, a new column of numeric type with quarter one to four was created. The previous column release date was converted to release year only as a numeric format.
 
