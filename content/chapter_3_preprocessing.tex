@@ -42,7 +42,7 @@ Considering the release date of a movie, the assumption was made that the demand
 During this preprocessing step, the created column productivity was binned two ways: Once multi-binned into four different bins having bins between 0.0 to 0.99 (label "\textit{unproductive}"), 1.0 to 1.99 (label "\textit{smallProductivity}"), 2.0 to 4.99 (label "\textit{goodProductivity}") and 5.0 to infinity (label "\textit{highProductivity}"), and once binary-binned into two bins having 0.0 to 0.9 (label "\textit{no}") and 1.0 (label "\textit{yes}") to infinity. For each bin a new column was added, the former productivity column was dropped.
 
 \section{Extracting information}
-
+Regex + Bild von Zelle und code
 
 \section{One hot encoding}
 Not only the in the previous step extracted information on genre, production country, production company director and actor was one hot encoded using the pandas get\_dummies()\footnote{The \hyperref{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html}{documentation}{pd.getDumies}{Documentation on pandas get\_dummies() function can be found online}} function, but also the original language. After one-hot-encoding, the dataset consisted of 7540 columns\footnote{The high number is due to the high number of different actors, directors, production companies and production countries. When creating a model, a threshold was used to exclude rare occurrences for each feature and {\textcolor{red}{\textbf{aggregate them in a bin "other"}}}}.
