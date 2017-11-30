@@ -8,7 +8,26 @@ In order to pick out columns that have a significant impact on forecasting a mov
 	\item The genre, the production company and the runtime are important information.
 \end{itemize}
 
-In order to transform the data into a suitable representation for forecasting a movie's success, preprocessing was mandatory. All preprocessing steps including either the following: Merging of columns, binning of features, extracting information out of columns, one hot encoding or normalizing. Before those steps could be applied, some columns were dropped out.
+In total, two datasets were used to create features for testing the different classifiers:
+\textit{movies\_metadata.csv} and \textit{credits.csv}. The dataset \textit{movies\_metadata.csv} contains 45,463 rows and 24 columns. The dataset \textit{credits.csv} contains 45,463 rows and 3 columns. Since not all columns were needed as features for the data mining step, some columns were dropped. \textbf{Nicht gerade wisschenschaftlich hier} Figure \ref{img:mm_columns} gives an overview.
+
+\begin{figure}
+	\includegraphics[width=\textwidth]{images/3_metadata_columns.png}
+	\caption{Dropped columns of \textit{movies\_metadata.csv}}
+	\label{img:mm_columns}
+\end{figure}
+
+
+In order to transform the data into a suitable representation for forecasting a movie's success, preprocessing was mandatory. All preprocessing steps included either the following:
+\begin{itemize}
+	\item Merging of columns
+	\item binning of features
+	\item extracting information out of columns
+	\item one hot encoding
+	\item normalizing
+\end{itemize}
+
+Before those steps could be applied, some columns were dropped out.
 
 Display which ones here!
 
