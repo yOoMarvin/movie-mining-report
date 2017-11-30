@@ -9,26 +9,11 @@ Neural Net,
 Decision Tree and 
 Random Forest.
 
-The first goal of the analysis was to predict the success in five different classes. Since an analysis in that detail with the given data set is very unprecise as seen in table \ref{tab:multi_classifier}, a binary classifier was created.
+The first goal of the analysis was to predict the success in five different classes. Since an analysis in that detail with the given data set is very unprecise, a binary classifier was created.
 For all of the named algorithms an individual feature selection is applied to get the best results. The important features are selected by a greedy feature wrapper. This feature wrapper starts with the full set of features and drops features as long as the result improves. The results are checked with a ten fold cross-validation. Additionally to the selection of features, filters for features like the number of actors and number of production companies can be applied, to only use a certain percentage of the most occurring of them. \\
 In the next step some hyperparameter tuning is needed to improve the classifiers. To find the best parameter setting, a gridsearch in combination with a ten-fold cross-validation, scoring the highest F1-score (macro), is applied to the classifiers.
 The achieved F1-scores of the three best binary classifier are listed in table \ref{tab:binary_classifier}. 
 At first the classifiers are scoring the micro F1-score. Even though the result looks promising at the beginning, the classifier are mostly guessing the majority class in this setting. For that reason every classifier is scoring on the macro F1-score. Since the data set for the binary classifier is unbalanced with a ratio of 76\% "successful" and 24\% "unsuccessful", the next step to improve the classifiers is to balance the train set. That for the stratified cross validation is used to balance the train set. For further improvement the data set can be downbalanced by shrinking the majority class of the train set to the size of the minority class. But since the data set is quite small already after the preprocessing, the downsampling worsens the classifiers. To not shrink the dataset any further upsampling can be used to increase the minority class of the train set to the size of the majority class. In the following section the decision tree, random forest and the support vector classifier are examined in more detail.
-
-\begin{center}
-\begin{table}
-	\begin{tabular}{ | p{3.5cm} | p{1.5cm} |}
-    \hline
-    Algorithm & F1 Macro \\ \hline
-    Decision Tree & 36.2\% \\ \hline
-    Random Forest & 40.4\% \\ \hline
-    Support Vector Classifier & 37.5\% \\
-    \hline
-    \end{tabular}
-    \caption{Multi Label Classifier Results} 
-    \label{tab:multi_classifier}
-\end{table}
-\end{center}
 
 \begin{center}
 \begin{table}
