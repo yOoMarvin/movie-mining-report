@@ -27,11 +27,12 @@ In order to transform the data into a suitable representation for forecasting a 
 \end{itemize}
 The following sections explain the preprocessing in detail and provide Python code-snippets. Figure \ref{img:features} shows precisely, which operations were executed on each column and how the data types changed.
 
-\begin{figure}
-	\includegraphics[width=\textwidth]{images/3_metadata_columns.png}
+\begin{wrapfigure}{l}{0.7\textwidth}
+	\includegraphics[width=0.7\textwidth]{images/3_metadata_columns.png}
 	\caption{Dropped columns of \textit{movies\_metadata.csv}. All retained columns are marked in yellow}
 	\label{img:mm_columns}
-\end{figure}
+\end{wrapfigure}
+\FloatBarrier
 
 \section{Merging and creating columns}
 \label{sec:merge_create}
@@ -52,12 +53,12 @@ Not only the in the previous step extracted information on genre, production cou
 In order to create equal meaning among the different numeric values in the dataset, during preprocessing some of the columns are normalized using MinMax scaling. The following list of columns is therefore normalized on a scale from zero to one: the runtime, the budget and the year.
 During the preprocessing of the data, a lot of new columns have been generated due to one hot encoding. In order to filter out unnecessary data, as for example actors, directors and companies, which are not frequently participating in the movie-production-scene a filter has been implemented. Thus it can be assured that only actors et. al are taken into account which participated in a reasonable amount of movies.
 
-\begin{figure}
-\includegraphics[width=\textwidth]{images/3_features.png}
-\caption{Features created during preprocessing}
-\label{img:features}
+\begin{figure}[htbp]
+	\includegraphics[width=\textwidth]{images/3_features.png}
+	\caption{Features created during preprocessing}
+	\label{img:features}
 \end{figure}
-
+\FloatBarrier
 
 %\begin{itemize}
 %	\item Transform data into a representation that is suitable for the chosen data mining methods
