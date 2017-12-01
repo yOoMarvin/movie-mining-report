@@ -24,19 +24,13 @@ The following sections explain the preprocessing in more detail. Figure \ref{img
 
 \paragraph{Merging and creating columns.}
 \label{sec:merge_create}
-
-
-
-When a new movie is planned, the finances are one of the most important concerns. Where the budget can be circumscribed upfront, revenue is nearly impossible to guess. As a result, the prediction of a model should consider the revenue as a key factor for it's monetary success. To only predict the revenue (using multiple bins or binary binning, like e.g. "will the revenue of a new movie be higher or lower than \$500,000?") would not have worked out due to multiple reasons: Both the revenue and budget of a movie in earlier years, like e.g. the 1950's, was
+When a new movie is planned, the finances are one of the most important concerns. As described in chapter \ref{sec:data_exploration}, a new column had to be introduced, namely the productivity. It is a quotient, computed by dividing revenue through budget. If the productivity is higher than one, the movie derives profit, if the productivity is less than one, the movie derives a loss. That way, above mentioned issues can be avoided. The column revenue was dropped afterwards.
 \begin{wrapfigure}{l}{0.7\textwidth}
 	\includegraphics[width=0.7\textwidth]{images/3_metadata_columns.png}
 	\caption{Remained columns of \textit{movies\_metadata.csv} are highlighted in yellow}
 	\label{img:mm_columns}
 \end{wrapfigure}
 \FloatBarrier
- considerably less than today, so total numbers are not comparable. Additionally, inflation plays a role in comparing financial numbers of elder movies to newer ones. Furthermore, the dataset contained different currencies like dollars, euros or indian rupees without indicating which currency was provided per dataset.
- 
-As described in chapter \ref{sec:data_exploration}, a new column had to be introduced, namely the productivity. It is a quotient, computed by dividing revenue through budget. If the productivity is higher than one, the movie derives profit, if the productivity is less than one, the movie derives a loss. That way, above mentioned issues can be avoided. The column revenue was dropped afterwards.
 
 Considering the release date of a movie, the assumption was made that the demand for movies is higher in quarter four of the year (time of winter and christmas). This was confirmed by checking the numbers\footnote{Check for details on revenues in video-selling: \hyperref{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}{link}{Statista revenue movies}{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}}. Hence, two new columns containing the release quarter and the release year have been created. The column release year has been dropped afterwards.
 
@@ -49,20 +43,20 @@ Some information, including the production companies, actors and crew members ar
 The first approach, parsing  JSON data failed, because  some columns contained invalid JSON format. After a closer analysis of the values inside the column, a new extraction concept could be developed. Given the values of the cast column, actors could be extracted by looking for the regular expressions inside the correlating values. For example actors could be identified by looking for the parameter name, and extracting the value provided by the parameter. The same procedure with slight changes has been applied to the extraction of the directors and the countries of production.
 
 After evaluation of the extracted parameters, ambiguous names for the production companies have been discovered. For example: "Twenty Century Fox", "Twenty Century-Fox" and "Twenty Century Fox Production". Without any further preprocessing each of the values would be one hot encoded separately. Therefore additional preprocessing has been performed to remove different ways of writing the same company, and therefore providing similar values for one hot encoding.
- 
-\paragraph{Normalizing, thresholding and one hot encoding.}
-The extracted information genre, production country, production company director, original language  and actor was one hot encoded using the pandas get\_dummies()\footnote{The \hyperref{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html}{documentation}{pd.getDumies}{Documentation on pandas \textit{get\_dummies()} function can be found online}} function. After one-hot-encoding, the dataset consisted of about 49,000 columns\footnote{The high number is due to the high number of different actors, directors, production companies and production countries.}.
-
-In order to reduce the amount of columns and to filter out unnecessary data a threshold can be applied to each classifier, as described in chapter \ref{cha:data_mining}.
-
-In order to create equal meaning among the different numeric values in the data set some of the columns, including runtime, budget and year, are normalized using MinMax scaling.
-
-\begin{figure}[htbp]
+\begin{figure}
 	\includegraphics[width=\textwidth]{images/3_features.png}
 	\caption{Features created during preprocessing}
 	\label{img:features}
 \end{figure}
-\FloatBarrier
+
+\paragraph{Normalizing, thresholding and one hot encoding.}
+The extracted information genre, production country, production company director, original language  and actor was one hot encoded using the pandas get\_dummies()\footnote{The \hyperref{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html}{documentation}{pd.getDumies}{Documentation on pandas \textit{get\_dummies()} function can be found online}} function. After one-hot-encoding, the dataset consisted of about 49,000 columns\footnote{The high number is due to the high number of different actors, directors, production companies and production countries.}.
+
+
+In order to reduce the amount of columns and to filter out unnecessary data a threshold can be applied to each classifier, as described in chapter \ref{cha:data_mining}. To create equal meaning among the different numeric values in the data set some of the columns including runtime, budget and year, are normalized using MinMax scaling.
+
+
+
 
 %\begin{itemize}
 %	\item Transform data into a representation that is suitable for the chosen data mining methods
