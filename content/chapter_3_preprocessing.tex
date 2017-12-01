@@ -24,15 +24,15 @@ The following sections explain the preprocessing in more detail. Figure \ref{img
 
 \paragraph{Merging and creating columns.}
 \label{sec:merge_create}
-When a new movie is planned, the finances are one of the most important concerns. As described in chapter \ref{sec:data_exploration}, a new column had to be introduced, namely the productivity. It is a quotient, computed by dividing revenue through budget. If the productivity is higher than one, the movie derives profit, if the productivity is less than one, the movie derives a loss. That way, above mentioned issues can be avoided. The column revenue was dropped afterwards.
-\begin{wrapfigure}{l}{0.7\textwidth}
+\begin{wrapfigure}{r}{0.7\textwidth}
 	\includegraphics[width=0.7\textwidth]{images/3_metadata_columns.png}
 	\caption{Remained columns of \textit{movies\_metadata.csv} are highlighted in yellow}
 	\label{img:mm_columns}
 \end{wrapfigure}
 \FloatBarrier
+When a new movie is planned, the finances are one of the most important concerns. As described in chapter \ref{sec:data_exploration}, a new column had to be introduced, namely the productivity. It is a quotient, computed by dividing revenue through budget. If the productivity is higher than one, the movie derives profit, if the productivity is less than one, the movie derives a loss. That way, above mentioned issues can be avoided. The column revenue was dropped afterwards.
 
-Considering the release date of a movie, the assumption was made that the demand for movies is higher in quarter four of the year (time of winter and christmas). This was confirmed by checking the numbers\footnote{Check for details on revenues in video-selling: \hyperref{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}{link}{Statista revenue movies}{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}}. Hence, two new columns containing the release quarter and the release year have been created. The column release year has been dropped afterwards.
+Considering the release date of a movie, the assumption was made that the demand for movies is higher in quarter four of the year (time of winter and christmas). This was confirmed by checking the numbers\footnote{Check for details on revenues in video-selling:\\ \hyperref{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}{link}{Statista revenue movies}{https://de.statista.com/statistik/daten/studie/182319/umfrage/umsatzentwicklung-im-video-kaufmarkt-quartalszahlen/}}. Hence, two new columns containing the release quarter and the release year have been created. The column release year has been dropped afterwards.
 
 \paragraph{Discretization.}
 During this preprocessing step, the created column containing the continuous attribute \textit{productivity} was binned using a binary and a multi-way split. The multi-way split contains four bins of user-provided boundaries ranging from $[0.0, 1.00)$ labeled \textit{unproductive}, $[1.0, 2.00)$ labeled \textit{smallProductivity}, $[2.0, 5.00)$ labeled \textit{goodProductivity} and $[5.0, \infty)$ labeled \textit{highProductivity}. The binary split was implemented using user-provided boundaries ranging from $[0.0, 1.0)$ labeled \textit{no} and $[1.0, \infty)$ labeled \textit{yes}. For each bin a new column was added (\textit{productivity\_binned\_multi}, \textit{productivity\_binned\_binary}) and the continuous attribute \textit{productivity} was dropped.
@@ -43,11 +43,12 @@ Some information, including the production companies, actors and crew members ar
 The first approach, parsing  JSON data failed, because  some columns contained invalid JSON format. After a closer analysis of the values inside the column, a new extraction concept could be developed. Given the values of the cast column, actors could be extracted by looking for the regular expressions inside the correlating values. For example actors could be identified by looking for the parameter name, and extracting the value provided by the parameter. The same procedure with slight changes has been applied to the extraction of the directors and the countries of production.
 
 After evaluation of the extracted parameters, ambiguous names for the production companies have been discovered. For example: "Twenty Century Fox", "Twenty Century-Fox" and "Twenty Century Fox Production". Without any further preprocessing each of the values would be one hot encoded separately. Therefore additional preprocessing has been performed to remove different ways of writing the same company, and therefore providing similar values for one hot encoding.
-\begin{figure}
+\begin{figure}[h]
 	\includegraphics[width=\textwidth]{images/3_features.png}
 	\caption{Features created during preprocessing}
 	\label{img:features}
 \end{figure}
+\FloatBarrier
 
 \paragraph{Normalizing, thresholding and one hot encoding.}
 The extracted information genre, production country, production company director, original language  and actor was one hot encoded using the pandas get\_dummies()\footnote{The \hyperref{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html}{documentation}{pd.getDumies}{Documentation on pandas \textit{get\_dummies()} function can be found online}} function. After one-hot-encoding, the dataset consisted of about 49,000 columns\footnote{The high number is due to the high number of different actors, directors, production companies and production countries.}.
