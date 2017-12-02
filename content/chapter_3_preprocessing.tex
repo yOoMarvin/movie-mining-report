@@ -5,10 +5,13 @@ In total, two datasets were used to create features for testing the different cl
 \textit{movies\_metadata.csv} and \textit{credits.csv}. The dataset \textit{movies\_metadata.csv} contains 45,463 rows and 23 columns excluding the id-column. The dataset \textit{credits.csv} contains 45,463 rows and 2 columns excluding the id-column.
 
 \paragraph{Vertical scaling}
-Both dimensions for the dataset \textit{movies\_metadata.csv} were processed. The revenue and budget played a major role for the data mining task. Therefore all datasets without information on each column had to be dropped, which was a major part of the dataset. Also duplicates were identified and discarded. 
+Both dimensions of the dataset \textit{movies\_metadata.csv} were processed. 
+The revenue and budget are the major components for this project, since they are used to derive the label values of the training instances. Because of the described inconsistencies of both attributes throughout the data set, new and reliable values need to be assigned to both of them. To achieve this, two parsers were programmed to mine the financial information for all movies contained in the data set. One parser extracted the values from the \textit{IMDb}\footnote{\hyperref{http://www.imdb.com/}{external_sources}{ref:IMDB}{The IMDB database: http://www.imdb.com/}} website and a second parser extracted the values from the \textit{The Numbers}\footnote{\hyperref{http://www.the-numbers.com/research-analysis}{external_sources}{ref:numbers}{the numbers website: http://www.the-numbers.com/research-analysis}} website. With these approaches it was possible to gain the real values of budget and revenue for the dataset.
+
+%The revenue and budget played a major role for the data mining task. Therefore all datasets without information on each column had to be dropped, which was a major part of the dataset. Also duplicates were identified and discarded. 
  
-After this, the dataset shrunk to roughly 4,000 rows. To retain some numbers and still use datasets which had only missing out revenue or budget two approaches were implemented: A parser for the IMDB database\footnote{
-\hyperref{http://www.imdb.com/}{external_sources}{ref:IMDB}{The IMDB database: http://www.imdb.com/}} API and for the The Numbers\footnote{\hyperref{http://www.the-numbers.com/research-analysis}{external_sources}{ref:numbers}{the numbers website: http://www.the-numbers.com/research-analysis}} API was programmed and run. With these approaches it was possible to gain the real values of budget and revenue for the dataset. By mining two of the most reliable movie-datasources out in the web, it was also possible to determine rows, which used foreign currency values in their revenue or only revenue based on the local market (e.g. only in the US).
+%After this, the dataset shrunk to roughly 4,000 rows. To retain some numbers and still use datasets which had only missing out revenue or budget two approaches were implemented: A parser for the IMDB database\footnote{
+%\hyperref{http://www.imdb.com/}{external_sources}{ref:IMDB}{The IMDB database: http://www.imdb.com/}} API and for the The Numbers\footnote{\hyperref{http://www.the-numbers.com/research-analysis}{external_sources}{ref:numbers}{the numbers website: http://www.the-numbers.com/research-analysis}} API was programmed and run. With these approaches it was possible to gain the real values of budget and revenue for the dataset. By mining two of the most reliable movie-datasources out in the web, it was also possible to determine rows, which used foreign currency values in their revenue or only revenue based on the local market (e.g. only in the US).
 
 \paragraph{Horizontal scaling}
 \begin{wrapfigure}{r}{0.6\textwidth}
@@ -23,7 +26,7 @@ The reason why information, which could have been potentially interesting, had t
 
 After dropping out information, eleven columns remain. Combined with the two columns from the \textit{credits.csv} dataset, thirteen columns are used as a basis to create features for finding the best performing classifiers.
 
-In order to transform the data into a suitable representation for forecasting a movie's success, preprocessing has been mandatory. For each column zero or more preprocessing steps from the following list were performed:\textit{Merging of columns, discretization (binning) of features, extracting information out of columns, one hot encoding, normalizing.}
+In order to transform the data into a suitable representation for forecasting a movie's success, preprocessing has been mandatory. For each column zero or more preprocessing steps from the following list were performed: \textit{Merging of columns, discretization (binning) of features, extracting information out of columns, one hot encoding, normalizing.}
 
 The following sections explain the preprocessing in more detail. Figure \ref{img:features} shows precisely, which operations were executed on each column and how the data types changed.
 \begin{figure}[h]
@@ -50,10 +53,10 @@ The first approach, parsing  JSON data failed, because  some columns contained i
 After evaluation of the extracted parameters, ambiguous names for the production companies have been discovered. For example: "Twenty Century Fox", "Twenty Century-Fox" and "Twenty Century Fox Production". Without any further preprocessing each of the values would be one hot encoded separately. Therefore additional preprocessing has been performed to remove different ways of writing the same company, and therefore providing similar values for one hot encoding.
 
 \paragraph{Normalizing, thresholding and one hot encoding}
-The extracted information genre, production country, production company director, original language  and actor was one hot encoded using the pandas get\_dummies()\footnote{The \hyperref{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html}{documentation}{pd.getDumies}{Documentation on pandas \textit{get\_dummies()} function can be found online}} function. After one-hot-encoding, the dataset consisted of about 49,000 columns\footnote{The high number is due to the high number of different actors, directors, production companies and production countries.}.
+The extracted information genre, production country, production company director, original language  and actor was one hot encoded using the pandas \textit{get\_dummies()}\footnote{The \hyperref{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html}{documentation}{pd.getDumies}{Documentation on pandas \textit{get\_dummies()} function can be found online}} function. After one-hot-encoding, the dataset consisted of about 49,000 columns\footnote{The high number is due to the high number of different actors, directors, production companies and production countries.}.
 
 
-In order to reduce the amount of columns and to filter out unnecessary data a threshold can be applied to each classifier, as described in chapter \ref{cha:data_mining}. To create equal meaning among the different numeric values in the data set some of the columns including runtime, budget and year, are normalized using MinMax scaling.
+In order to reduce the amount of columns and to filter out unnecessary data a threshold can be applied to each classifier, as described in chapter \ref{cha:data_mining}. To create equal importance among the different numeric values in the data set, these columns (including runtime, budget and year) are normalized using MinMax scaling.
 
 
 
