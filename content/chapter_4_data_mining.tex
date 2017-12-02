@@ -29,21 +29,44 @@ Previous tests using the micro F1-score have shown, that even though promising r
 	\caption{Macro average ROC Curves for all classifiers}
 	\label{img:roc}
 \end{figure}
- 
-%\begin{center}
-%\begin{table}
-%	\begin{tabular}{ | p{3.5cm} | p{1.5cm} | p{1.5cm} | p{2cm} | p{2cm} |}
-%    \hline
-%    Algorithm & F1 Macro & F1 Micro & Downsampled Macro  & Downsampled Micro\\ \hline
-%    Decision Tree & 56.5\% & 75.5\% & 61.9\% & 63.0\% \\ \hline
-%    Random Forest & 58.7\% & 76.0\% & 80.6\% & 81.5\% \\ \hline
-%    Support Vector Classifier & 56.5\% & 75.0\% & 60.7\% & 60.8\% \\
-%    \hline
-%    \end{tabular}
-%    \caption{Binary Classifier Results} 
-%   \label{tab:binary_classifier}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+%% \usepackage{graphicx}
+%\begin{table}[]
+%\centering
+%\resizebox{\textwidth}{!}{%
+%\begin{tabular}{@{}lllll@{}}
+% & k-NN & SVM & SVM &  \\
+%thresholds & actor: 8 company:3 director:3 & actor: 8 company: 3 director: 3 & no threshold &  \\
+%columns dropped & 'actor\_', 'quarter\_', 'genre\_', 'country\_', 'runtime', 'adult' & 'quarter\_', 'adult', 'actor\_', 'director\_' & 'country\_', 'genre\_', 'runtime', 'adult', 'actor\_', 'director\_' &  \\
+%hyperparameter & \begin{tabular}[c]{@{}l@{}}'algorithm': 'auto', 'metric': 'euclidean', 'n\_neighbors': 16,\\   'p': 2, 'weights': 'uniform'\end{tabular} & class\_weight': 'balanced', 'multi\_class': 'ovr' & no parameters &  \\
+%precision &  &  &  &  \\
+%recall &  &  &  &  \\
+%F1 (macro) & 0,6141 & 0,6069 & 0,5777 & 
+%\end{tabular}%
+%}
+%\caption{My caption}
+%\label{my-label}
 %\end{table}
-%\end{center}
+
+\begin{center}
+\begin{table}
+	\begin{tabular}{ | p{2,5cm} | p{2,5cm} | p{2.5cm} | p{3cm}|}
+    \hline
+   Thresholds & k-NN & SVM & NB\\ \hline
+    Columns dropped & actor\_, quarter\_, genre\_, country\_, runtime, adult & quarter\_, adult, actor\_, director\_ & country\_, genre\_, runtime, adult, actor\_, director\_  \\ \hline
+    hyperparameter & algorithm= auto, metric= euclidean, neighbors= 16, p= 2, weights= uniform & class\_weight= balanced, 'multi\_class= ovr & no parameters  \\ \hline
+    Precison&  &  &  \\ \hline
+	recall &  &  &   \\ \hline
+	F1(macro) & 0,6141 & 0,6069 & 0,5777 \\ \hline
+    
+    \end{tabular}
+    \caption{Results overview} 
+   \label{tab:values}
+\end{table}
+\end{center}
 \section {Classifiers}
 \paragraph{K nearest neighbor}
 After the preprocessing the data set is highly dimensional with more than 50,000 columns. Even though kNN does not work very well on a high dimensional data set, the algorithm is the best performing one with a good feature selection. After dropping all the actors, country, genre and quarter information and limiting the director and the companies to the ones that took part at at least three movies of the data set, the algorithm scores an F1 score of 61.4\%. The algorithm is comparing the labels of the 16 nearest neighbors calculated with the euclidean distance. Both down- and upsampling worsens the classifier. 
