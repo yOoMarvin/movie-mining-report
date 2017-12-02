@@ -45,10 +45,17 @@ As the kNN the support vector classifier works best after dropping a lot of feat
 
 %\paragraph{Random Forest}
 %Like the decision tree, random forest builds  a hierarchical structure, which can handle unbalanced data sets better than other algorithms. In addition it corrects the overfitting habit of a decision tree. In the gridsearch hyperparameters like the split-criterion, number of features, the minimum sample to split and whether bootstrap samples are used or not are evaluated. After dropping the actors and the release quarter, the classifier scores a F1 score of 59\%. As with the decision tree neither down- nor upsampling the train set improves the result.
-
+\newpage
 \section{Evaluation and Prospect}
 \paragraph{Evaluation}
-As discovered in the previous paragraphs, some classifiers perform better than others. One reason could be seen in the dataset. The final dataset of about ~3,800 rows can be considered as relativly small. Therefore, as shown in the ROC Curves above, Decision Tree and Random forrest are not performing the best scores. Usually they are rely on large data set, where they can evaluate data more efficiently. The Random forest however, scores an higher accuracy since it takes knowledge from various trees inside the forest.
+\label{cha:prospect}
+\begin{wrapfigure}{l}{0.6\textwidth}
+	\includegraphics[width=0.6\textwidth]{images/roc.png}
+	\caption{Macro average ROC Curves for all classifiers}
+	\label{img:roc}
+\end{wrapfigure}
+
+As discovered in the previous paragraphs, some classifiers perform better than others. One reason could be seen in the dataset. The final dataset of about ~3900 rows can be considered as relativly small. Therefore, as shown in the ROC Curves above, Decision Tree and Random forrest are not performing the best scores. Usually they are rely on large data set, where they can evaluate data more efficiently. The Random forest however, scores an higher accuracy since it takes knowledge from various trees inside the forest.
 
 Other classifiers as for example Na\"{i}ve Bayes perform not as well as the trees. One possible reason could be that Na\"{i}ve Bayes assumes that no correlation between the features exist. However, in this specific task movies with more famous actors usually generate a bigger budget. 
 
