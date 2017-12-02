@@ -19,17 +19,17 @@ Exploring the dataset it can be noticed that the overall quality varies signific
 
 In addition to that, there is no indication about the currencies of numerical financial attributes and a lot of values are inconsistent in respect to scaling. For example a movie having an actual revenue of \$ 312 MM and a budget of \$ 240 MM is given with a \textit{revenue} value of \textit{240,000,000} as a float number whereas the \textit{budget} value contains the float number \textit{312}. For the successful outcome of this project it is critical to keep those aspects in mind for later preprocessing steps, otherwise the result will be distorted.
 
-Speaking of those issues it is also worth mentioning that the chosen dataset contains movie metadata from the past 60 years. With respect to today's economics a lot of things changed in movie production and consumption. Aspects that have influenced movie economics are for example price structures, inflation and globalization. But also consumer behavior changed drastically. Therefore it was decided to introduce a new attribute to the dataset, which will be called \textit{productivity}. This value describes the ratio of the revenue and the budget of the movie and expresses the success of a movie in this project. A \textit{productivity} of $1.0$ implies that the investment to produce this movie was covered and anything above $1.0$ is assumed as profit.
-\\
-
-To get a better understanding of the data and its relations a few examinations where taken and are presented in the table below.
-\begin{center}
+Speaking of those issues it is also worth mentioning that the chosen dataset contains movie metadata from the past 60 years. With respect to today's economics a lot of things changed in movie production and consumption. Aspects that have influenced movie economics are for example price structures, inflation and globalization. But also consumer behavior changed drastically. Therefore it was decided to introduce a new attribute to the dataset, which will be called \textit{productivity}. 
+\begin{wraptable}{l}{0.55\textwidth}
 	\begin{tabular}{| l | l |}
 	\hline
 	Average budget & \$ 31,662,585 \\ \hline
 	Average revenue & \$ 92,059,210 \\ \hline
-	Average productivity rate & 2.8 \\ \hline
-	3 Most common genres & Drama, Comedy, Thriller \\ \hline
+	Average productivity & 2.8 \\ \hline
+	Most common genres & Drama, Comedy,\\ & Thriller \\ \hline
 	Average runtime & 94 min. \\ \hline
 	\end{tabular}
-\end{center} 
+\end{wraptable} 
+This value describes the ratio of the revenue and the budget of the movie and expresses the success of a movie in this project. A \textit{productivity} of $1.0$ implies that the investment to produce this movie was covered and anything above $1.0$ is assumed as profit.
+\\
+To get a better understanding of the data and its relations a few examinations where taken and are presented in the table.
