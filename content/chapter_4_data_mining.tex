@@ -3,7 +3,7 @@
 
 After preprocessing the data, the next step is to build a classifier to predict the success of a movie. To find the best classifier a set of different algorithms is evaluated:
 K-Nearest Neighbor, 
-Naive Bayes, 
+Na\"{i}ve Bayes, 
 Support Vector Classifier, 
 Neural Net, 
 Decision Tree and 
@@ -48,11 +48,14 @@ As the kNN the support vector classifier works best after dropping a lot of feat
 
 \section{Evaluation and Prospect}
 \paragraph{Evaluation}
-As discovered in the previous paragraphs, some classifiers perform better than others given the provided task. Big impact is due to the amount of data which each classifier receives. From 45,000 in the beginning a reasonable amount of data needed to be dropped in order to maintain quality. The final dataset of about ~3,800 rows can be considered as small. 
+As discovered in the previous paragraphs, some classifiers perform better than others. One reason could be seen in the dataset. The final dataset of about ~3,800 rows can be considered as relativly small. Therefore, as shown in the ROC Curves above, Decision Tree and Random forrest are not performing the best scores. Usually they are rely on large data set, where they can evaluate data more efficiently. The Random forest however, scores an higher accuracy since it takes knowledge from various trees inside the forest.
 
-Decision trees seem to be best performing in this specific task, since they not rely on signals from both classes. The same concept is performed by the Random forrest classifier. This classifier extends the benefit from a decision tree, and evaluates it with a forrest out of trees. Therefore also large datasets can easily be evaluated and learned. Since each decision tree is build and classified separately high performance is guaranteed.
+Other classifiers as for example Na\"{i}ve Bayes perform not as well as the trees. One possible reason could be that Na\"{i}ve Bayes assumes that no correlation between the features exist. However, in this specific task movies with more famous actors usually generate a bigger budget. 
 
-Other classifiers as for example Naive Bayes perform not as well as the trees. One possible reason could be the assumptions that no correlation between the features should exist. However, in this specific task movies with more famous actors usually generate a bigger budget. Still a reasonable good score can be reached, which might be due to the cause that only a small interdepence is influencing the tree.
+
+
+
+
 
 
 %\begin{itemize}
