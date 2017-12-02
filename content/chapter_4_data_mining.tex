@@ -1,19 +1,13 @@
 \chapter{Data Mining}
 \label{cha:data_mining}
 
-%\begingroup
-%\renewcommand{\cleardoublepage}{}
-%\renewcommand{\clearpage}{}
-%\chapter{Data Mining}\label{cha:data_mining}
-%\endgroup
-
 After preprocessing the data, the next step is to build a classifier to predict the success of a movie. To find the best classifier a set of different algorithms is evaluated:
 K-nearest neighbor (kNN), 
 na\"{i}ve bayes, 
 support vector classifier (svc), 
-Neural Net, 
-Decision Tree and 
-Random Forest.
+neural net, 
+decision tree and 
+random forest.
 
 The first goal of the analysis was to predict the success in four different classes. Since an analysis in that detail with the given data set is very unprecise, a binary classifier was created.
 For all of the named algorithms an individual feature selection is applied to get the best results. The important features are selected by a greedy feature wrapper. This feature wrapper starts with the full set of features and drops features as long as the result improves. The results are checked with a stratified 10-fold cross-validation. Additionally to the selection of features, filters for features like the number of actors and number of production companies can be applied. For example actors, directors and companies, which are not frequently participating in the movie-production-scene can be eliminated. Thus it can be assured that only columns are taken into account which are contained in a reasonable amount of movies, and therefore have an impact on the classifier. \\
