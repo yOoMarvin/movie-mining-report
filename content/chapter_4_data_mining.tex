@@ -14,7 +14,7 @@ neural net,
 decision tree and 
 random forest.
 
-The first goal of the analysis was to predict the success in four different classes. Since an analysis in that detail with the given data set is very unprecise, a binary classifier was created.
+The first goal of the analysis was to predict the success in four different classes. Since an analysis in that detail with the given dataset is very unprecise, a binary classifier was created.
 For all of the named algorithms an individual feature selection is applied to get the best results. The important features are selected by a greedy feature wrapper. This feature wrapper starts with the full set of features and drops features as long as the result improves. The results are checked with a stratified 10-fold cross-validation. Additionally to the selection of features, thresholding for features like the number of actors and number of production companies can be applied. For example actors, directors and companies, which are not frequently participating in the movie-production-scene can be eliminated. Thus it can be assured that only columns are taken into account which are contained in a reasonable amount of movies, and therefore have an impact on the classifier. \\
 In the next step some hyperparameter tuning is needed to improve the classifiers. To find the best parameter setting, a grid search in combination with a stratified 10-fold cross-validation, scoring the highest F1-score (macro), is applied to the classifiers.
 %The achieved F1-scores of the three best binary classifier are listed in table \ref{tab:binary_classifier}. 
@@ -63,7 +63,8 @@ In the following section the the two best performing classifiers - kNN and SVC -
 \begin{table}
 	\begin{tabular}{ | p{2,5cm} | p{2,5cm} | p{2.5cm} | p{3cm}|}
     \hline
-   Thresholds & k-NN & SVM & NB\\ \hline
+    & k-NN & SVM & NB\\ \hline
+	thresholds & actor: 8 company:3 director:3 & actor: 8 company: 3 director: 3 & no threshold \\  \hline
     Columns dropped & actor\_, quarter\_, genre\_, country\_, runtime, adult & quarter\_, adult, actor\_, director\_ & country\_, genre\_, runtime, adult, actor\_, director\_  \\ \hline
     hyperparameter & algorithm= auto, metric= euclidean, neighbors= 16, p= 2, weights= uniform & class\_weight= balanced, 'multi\_class= ovr & no parameters  \\ \hline
     Precison&  &  &  \\ \hline
@@ -77,17 +78,17 @@ In the following section the the two best performing classifiers - kNN and SVC -
 \end{center}
 \section {Classifiers}
 \paragraph{K nearest neighbor}
-After the preprocessing the dataset is highly dimensional with more than 50,000 columns. Even though kNN does not work very well on a high dimensional dataset, the algorithm is the best performing one with a good feature selection. After dropping all the actors, country, genre and quarter information and limiting the director and the companies to the ones that took part at at least three movies of the data set, the classifier scores an F1 score of 61.4\%. The algorithm is comparing the labels of the 16 nearest neighbors calculated with the euclidean distance. Both down- and upsampling worsens the classifier. 
+After the preprocessing the dataset is highly dimensional with more than 50,000 columns. Even though kNN does not work very well on a high dimensional dataset, the algorithm is the best performing one with a good feature selection. After dropping all the actors, country, genre and quarter information and limiting the director and the companies to the ones that took part at at least three movies of the dataset, the classifier scores an F1 score of 61.4\%. The algorithm is comparing the labels of the 16 nearest neighbors calculated with the euclidean distance. Both down- and upsampling worsens the classifier. 
 
 \paragraph{Support vector classifier}
 As the kNN the support vector classifier works best after dropping a lot of features. Without any information to the actors, country, quarter, genre and age limitation and limiting the companies and directors to the ones that took part at at least three movies, the classifier scores an F1 score of 60.7\%. For the best result the algorithm works with a linear kernel and a balanced class weight. Both down- and upsampling worsens the classifier.
 
 %\paragraph{Decision Tree}
-%One way to deal with the issue of an unbalanced data set is to use a tree-structured classifier, since the hierarchical structure allows them to learn signals from both classes.
+%One way to deal with the issue of an unbalanced dataset is to use a tree-structured classifier, since the hierarchical structure allows them to learn signals from both classes.
 %To find the best parameter setting for the decision tree the grid-search tests the parameters split criterion, max depth, minimum samples to split and the class weight in a ten fold cross-validation. After dropping the "quarter", "runtime" and "adult" columns, the classifier scores without any sampling, no class weight, an entropy split criterion and a max depth of 100 an F1 score of 58\%. Both the down- and the upsampling worsens the classifier.
 
 %\paragraph{Random Forest}
-%Like the decision tree, random forest builds  a hierarchical structure, which can handle unbalanced data sets better than other algorithms. In addition it corrects the overfitting habit of a decision tree. In the gridsearch hyperparameters like the split-criterion, number of features, the minimum sample to split and whether bootstrap samples are used or not are evaluated. After dropping the actors and the release quarter, the classifier scores a F1 score of 59\%. As with the decision tree neither down- nor upsampling the train set improves the result.
+%Like the decision tree, random forest builds  a hierarchical structure, which can handle unbalanced datasets better than other algorithms. In addition it corrects the overfitting habit of a decision tree. In the gridsearch hyperparameters like the split-criterion, number of features, the minimum sample to split and whether bootstrap samples are used or not are evaluated. After dropping the actors and the release quarter, the classifier scores a F1 score of 59\%. As with the decision tree neither down- nor upsampling the train set improves the result.
 \section{Evaluation and Prospect}
 \paragraph{Evaluation}
 
