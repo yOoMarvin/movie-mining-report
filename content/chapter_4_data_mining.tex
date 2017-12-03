@@ -3,9 +3,6 @@
 \chapter{Data Mining}\label{cha:data_mining}
 \endgroup
 
-
-
-
 After preprocessing the data, the next step is to build a classifier to predict the success of a movie. To find the best classifier a set of different algorithms is evaluated:
 K-nearest neighbor (kNN), 
 na\"{i}ve bayes, 
@@ -21,16 +18,16 @@ In the next step some hyperparameter tuning is needed to improve the classifiers
 
 Previous tests using the micro F1-score have shown, that even though promising results could be scored, the classifiers only learned guessing the majority in this setting. Therefore the F1-score had been changed to macro,
 %At first the classifiers are scoring the micro F1-score. Even though the result looks promising at the beginning, the classifier are mostly guessing the majority class in this setting. For that reason every classifier is scoring on the macro F1-score.
- since the dataset for the binary classifier is unbalanced with a ratio of 75\% "successful" and 25\% "unsuccessful". Therefore another test to improve the classifiers is to balance the train set.
+ since the dataset for the binary classifier is unbalanced with a ratio of 75\% \textit{successful} and 25\% \textit{unsuccessful}. Therefore another test to improve the classifiers is to balance the train set.
 %That for the stratified cross-validation is used to balance the train set.
-That for the stratified cross-validation is extended with an optional argument to balance the train set by down- or upsampling.
+Consequently, the stratified cross-validation is extended with an optional argument to balance the train set by up- or downsampling.
 %For further improvement
-The train set can be downbalanced by shrinking the majority class to the size of the minority class. However, test series showed that downsampled training sets result in lower performance scores of the classifiers. It is assumed that the reason is the already small dataset.
+The train set can be downbalanced by shrinking the majority class to the size of the minority class. However, test series have shown that downsampled training sets result in poor performance scores of the classifiers. It is assumed that the reason is the already small dataset.
 %But since the dataset is already small after the preprocessing, the downsampling worsens the classifiers.
-To not shrink the dataset any further upsampling can be applied to increase the minority class of the train set to the size of the majority class. However, also this sampling technique showed a decrease in performance.
+In order to avoid shrinking the dataset even further upsampling can be applied to increase the minority class of the train set to the size of the majority class. However, also this sampling technique showed a decrease in performance.
 The performance of the classifiers can be seen in the ROC curve in figure \ref{img:roc}.
 
-In the following section the the two best performing classifiers - kNN and SVC - are examined in more detail.
+In the following section the two best performing classifiers - kNN and SVC - are examined in more detail.
 \begin{figure}[h]
 	\center
 	\includegraphics[width=0.7\textwidth]{images/roc.png}
@@ -78,7 +75,7 @@ In the following section the the two best performing classifiers - kNN and SVC -
 \end{center}
 \section {Classifiers}
 \paragraph{K nearest neighbor}
-After the preprocessing the dataset is highly dimensional with more than 50,000 columns. Even though kNN does not work very well on a high dimensional dataset, the algorithm is the best performing one with a good feature selection. After dropping all the actors, country, genre and quarter information and limiting the director and the companies to the ones that took part at at least three movies of the dataset, the classifier scores an F1 score of 61.4\%. The algorithm is comparing the labels of the 16 nearest neighbors calculated with the euclidean distance. Both down- and upsampling worsens the classifier. 
+After preprocessing the dataset is highly dimensional with more than 50,000 columns. Even though kNN does not work very well on a high dimensional dataset, the algorithm is best performing with a reasonable feature selection. After dropping the \textit{actors}, \textit{country}, \textit{genre} and \textit{quarter} information and limiting the \textit{director} and the \textit{companies} to the ones that took part at at least three movies of the dataset, the classifier scores an F1 score of 61.4\%. The algorithm is comparing the labels of the 16 nearest neighbors calculated with the euclidean distance. Both down- and upsampling worsens the classifier. 
 
 \paragraph{Support vector classifier}
 As the kNN the support vector classifier works best after dropping a lot of features. Without any information to the actors, country, quarter, genre and age limitation and limiting the companies and directors to the ones that took part at at least three movies, the classifier scores an F1 score of 60.7\%. For the best result the algorithm works with a linear kernel and a balanced class weight. Both down- and upsampling worsens the classifier.
@@ -94,11 +91,9 @@ As the kNN the support vector classifier works best after dropping a lot of feat
 
 \label{cha:prospect}
 
-As discovered in the previous paragraphs, some classifiers perform better than others. One reason could be seen in the amount of data in the dataset. The final dataset of about 3,900 rows can be considered as small. Therefore, as shown in the ROC curves above, decision tree and random forest are not performing the best scores. Usually they rely on large dataset, where they can evaluate data more efficiently. The random forest however, scores an higher accuracy since it takes knowledge from various trees inside the forest.
+As discovered in the previous paragraphs, some classifiers perform better than others. One reason can be seen in the amount of data in the dataset. The final dataset of about 3,900 rows can be considered as small. Therefore, as shown in the ROC curves above, decision tree and random forest are not performing as well as kNN and SVC. Trees usually rely on large datasets, where they can evaluate data more efficiently. The random forest however, performs better since it takes knowledge from various trees inside the forest into account.
 
-
-
-Other classifiers as for example na\"{i}ve bayes perform not as well as the trees. One possible reason could be that na\"{i}ve bayes assumes that no correlation between the features exist. In order to improve this classifier more research needs to be investigated to determine correlation between features.
+Other classifiers as for example na\"{i}ve bayes do not perform well as the trees. One possible reason could be that na\"{i}ve bayes assumes that no correlation between the features exist. In order to improve this classifier more research needs to be investigated to determine correlation between features.
 %However, in this specific task movies with more famous actors usually generate a bigger budget. 
 
 Best scores are reached with the kNN and the SVC. The kNN classifier works best with values close to the training example, as it calculates the distance between the features. An object itself is than classified by the majority votes of each neighbor.
