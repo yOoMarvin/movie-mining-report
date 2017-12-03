@@ -17,7 +17,7 @@ random forest.
 The first goal of the analysis was to predict the success in four different classes. Since an analysis in that detail with the given data set is very unprecise, a binary classifier was created.
 For all of the named algorithms an individual feature selection is applied to get the best results. The important features are selected by a greedy feature wrapper. This feature wrapper starts with the full set of features and drops features as long as the result improves. The results are checked with a stratified 10-fold cross-validation. Additionally to the selection of features, thresholding for features like the number of actors and number of production companies can be applied. For example actors, directors and companies, which are not frequently participating in the movie-production-scene can be eliminated. Thus it can be assured that only columns are taken into account which are contained in a reasonable amount of movies, and therefore have an impact on the classifier. \\
 In the next step some hyperparameter tuning is needed to improve the classifiers. To find the best parameter setting, a grid search in combination with a stratified 10-fold cross-validation, scoring the highest F1-score (macro), is applied to the classifiers.
-The achieved F1-scores of the three best binary classifier are listed in table \ref{tab:binary_classifier}. 
+%The achieved F1-scores of the three best binary classifier are listed in table \ref{tab:binary_classifier}. 
 
 Previous tests using the micro F1-score have shown, that even though promising results could be scored, the classifiers only learned guessing the majority in this setting. Therefore the F1-score had been changed to macro,
 %At first the classifiers are scoring the micro F1-score. Even though the result looks promising at the beginning, the classifier are mostly guessing the majority class in this setting. For that reason every classifier is scoring on the macro F1-score.
@@ -28,6 +28,7 @@ That for the stratified cross-validation is extended with an optional argument t
 The train set can be downbalanced by shrinking the majority class to the size of the minority class. However, test series showed that downsampled training sets result in lower performance scores of the classifiers. It is assumed that the reason is the already small dataset.
 %But since the dataset is already small after the preprocessing, the downsampling worsens the classifiers.
 To not shrink the dataset any further upsampling can be applied to increase the minority class of the train set to the size of the majority class. However, also this sampling technique showed a decrease in performance.
+The performance of the classifiers can be seen in the ROC curve in figure \ref{img:roc}.
 
 In the following section the the two best performing classifiers - kNN and SVC - are examined in more detail.
 \begin{figure}[h]
