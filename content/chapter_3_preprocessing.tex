@@ -56,7 +56,7 @@ After evaluation of the extracted parameters, ambiguous names for the production
 The extracted information genre, production country, production company director, original language  and actor were one hot encoded using the pandas \textit{get\_dummies()}\footnote{The \hyperref{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html}{documentation}{pd.getDumies}{Documentation on pandas \textit{get\_dummies()} function can be found online}} function. After one-hot-encoding, the dataset consisted of about 49,000 columns\footnote{The high number is due to the high number of different actors, directors, production companies and production countries.}.
 
 
-In order to reduce the amount of columns and to filter out unnecessary data a threshold can be applied to each classifier, as described in chapter \ref{cha:data_mining}. To create equal importance among the different numeric values in the data set, these columns (including runtime, budget and year) are normalized using MinMax scaling.
+In order to reduce the amount of columns and to filter out unnecessary data a threshold can be applied to each classifier, as described in chapter \ref{cha:data_mining}. To create equal importance among the different numeric values in the dataset, these columns (including runtime, budget and year) are normalized using MinMax scaling.
 
 
 
