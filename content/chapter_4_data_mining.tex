@@ -62,11 +62,13 @@ After preprocessing the dataset is highly dimensional with more than 50,000 colu
 \paragraph{Support vector classifier}
 As the kNN the support vector classifier works best after dropping a lot of features. Without any information to the actors, country, quarter, genre and age limitation and limiting the companies and directors to the ones that took part at at least three movies, the classifier scores an F1 score of 60.7\%. For the best result the algorithm works with a linear kernel and a balanced class weight. Both down- and upsampling worsens the classifier.
 
-%\begin{figure}
-%	\includegraphics[width=\textwidth]{images/Classifier.png}
-%	\caption{Overview of the results and parameters of each classifier \footnote{Hyperparamter listed show only the differences to default values given in the \textit{scikit}-documentation.}}
-%	\label{img:classifiers}
-%\end{figure}
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{images/Classifier.png}
+	\caption[Overview of the results and parameters of each classifier]{Overview of the results and parameters of each classifier\footnotemark}
+\label{img:classifiers}
+\end{figure}
+\FloatBarrier
+\footnotetext{Hyperparamter listed show only the differences to default values given in the \textit{scikit}-documentation.}
 
 %\paragraph{Decision Tree}
 %One way to deal with the issue of an unbalanced dataset is to use a tree-structured classifier, since the hierarchical structure allows them to learn signals from both classes.
