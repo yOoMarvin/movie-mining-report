@@ -75,6 +75,7 @@ Similar to the kNN the SVC works best after dropping a lot of features. Without 
 
 %\paragraph{Random Forest}
 %Like the decision tree, random forest builds  a hierarchical structure, which can handle unbalanced datasets better than other algorithms. In addition it corrects the overfitting habit of a decision tree. In the gridsearch hyperparameters like the split-criterion, number of features, the minimum sample to split and whether bootstrap samples are used or not are evaluated. After dropping the actors and the release quarter, the classifier scores a F1 score of 59\%. As with the decision tree neither down- nor upsampling the train set improves the result.
+
 \section{Interpretation and Prospect}
 \paragraph{Interpretation}
 As discovered in the previous paragraphs, some classifiers perform better than others. One reason can be seen in the amount of data in the dataset. The final dataset of about 3,900 rows can be considered as small. Therefore, as shown in the ROC curves above, decision tree and random forest are not performing as well as kNN and SVC. %The tree structures work well with the issue of an unbalanced dataset as the given one, since the hierarchical structure allows them to learn signals from both classes.
