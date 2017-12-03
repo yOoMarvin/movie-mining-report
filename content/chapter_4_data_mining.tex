@@ -17,23 +17,24 @@ For all of the named algorithms an individual feature selection is applied to ge
 In the next step some hyperparameter tuning is needed to improve the classifiers. To find the best parameter setting, a grid search in combination with a stratified 10-fold cross-validation, scoring the highest F1-score (macro), is applied to the classifiers.
 %The achieved F1-scores of the three best binary classifier are listed in table \ref{tab:binary_classifier}. 
 
-Previous tests using the micro F1-score have shown, that even though promising results could be scored, the classifiers only learned guessing the majority in this setting. Therefore the F1-score had been changed to macro,
+Previous tests using the micro F1-score have shown, that even though promising results could be scored, the classifiers only learned guessing the majority class. Therefore the F1-score had been changed to macro,
 %At first the classifiers are scoring the micro F1-score. Even though the result looks promising at the beginning, the classifier are mostly guessing the majority class in this setting. For that reason every classifier is scoring on the macro F1-score.
  since the dataset for the binary classifier is unbalanced with a ratio of 75\% \textit{successful} and 25\% \textit{unsuccessful}. Therefore another test to improve the classifiers is to balance the train set.
 %That for the stratified cross-validation is used to balance the train set.
 Consequently, the stratified cross-validation is extended with an optional argument to balance the train set by up- or downsampling.
 %For further improvement
 The train set can be downbalanced by shrinking the majority class to the size of the minority class. However, test series have shown that downsampled training sets result in poor performance scores of the classifiers. It is assumed that the reason is the already small dataset.
-%But since the dataset is already small after the preprocessing, the downsampling worsens the classifiers.
-In order to avoid shrinking the dataset even further upsampling can be applied to increase the minority class of the train set to the size of the majority class. This sampling method improved the performance of some of the classifiers as seen in \ref{img:classifiers}.
-The performance of the classifiers can be seen in the ROC curve in figure \ref{img:roc}. The scored F1 values with the selected hyperparameters can be found at figure \ref{img:classifiers}.
-In the following section the two best performing classifiers - kNN and SVC - are examined in more detail.
-\begin{figure}[h]
-	\center
-	\includegraphics[width=0.7\textwidth]{images/roc.png}
+\begin{wrapfigure}{r}{0.6\textwidth}
+	\includegraphics[width=0.6\textwidth]{images/roc.png}
 	\caption{Macro average ROC curves for all classifiers}
 	\label{img:roc}
-\end{figure}
+\end{wrapfigure}
+%But since the dataset is already small after the preprocessing, the downsampling worsens the classifiers.
+In order to avoid shrinking the dataset even further upsampling can be applied to increase the minority class of the train set to the size of the majority class. This sampling method improved the performance of some of the classifiers as seen in \ref{img:classifiers}.
+
+The performance of the classifiers can be seen in the ROC curve in figure \ref{img:roc}. The scored F1 values with the selected hyperparameters can be found at figure \ref{img:classifiers}.
+In the following section the two best performing classifiers - kNN and SVC - are examined in more detail.
+
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 %% \usepackage{graphicx}
@@ -55,11 +56,10 @@ In the following section the two best performing classifiers - kNN and SVC - are
 %\end{table}
 
 %\section {Classifiers}
-\paragraph{K nearest neighbor}
+\paragraph{kNN}
 After preprocessing the dataset is highly dimensional with more than 50,000 columns. Even though kNN does not work very well on a high dimensional dataset, the algorithm is best performing with a reasonable feature selection. After dropping the \textit{actors}, \textit{country}, \textit{genre} and \textit{quarter} information and limiting the \textit{director} and the \textit{companies} to the ones that took part at at least three movies of the dataset, the classifier scores an F1 score of 60.5\%. The algorithm is comparing the labels of the 16 nearest neighbors calculated with the euclidean distance. Both down- and upsampling worsens the classifier. 
-\paragraph{Support vector classifier}
+\paragraph{SVC}
 As the kNN the support vector classifier works best after dropping a lot of features. Without any information to the actors, country, quarter, genre and age limitation and limiting the companies and directors to the ones that took part at at least three movies, the classifier scores an F1 score of 60.2\%. For the best result the algorithm works with a linear kernel and a balanced class weight. Upsampling improves the classifier.
-\\ \\
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{images/Classifier.png}
 	\caption[Overview of the results and parameters of each classifier]{Overview of the results and parameters of each classifier\footnotemark}
