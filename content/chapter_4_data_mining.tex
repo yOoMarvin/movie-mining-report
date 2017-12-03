@@ -21,7 +21,7 @@ Previous tests using the micro F1-score have shown, that even though promising r
 %At first the classifiers are scoring the micro F1-score. Even though the result looks promising at the beginning, the classifier are mostly guessing the majority class in this setting. For that reason every classifier is scoring on the macro F1-score.
  since the dataset for the binary classifier is unbalanced with a ratio of 75\% \textit{successful} and 25\% \textit{unsuccessful}. Therefore another test to improve the classifiers is to balance the train set.
 %That for the stratified cross-validation is used to balance the train set.
-Consequently, the stratified cross-validation is extended with an optional argument to balance the train set by up- or downsampling.
+Consequently the stratified cross-validation is extended with an optional argument to balance the train set by up- or downsampling.
 %For further improvement
 The train set can be downbalanced by shrinking the majority class to the size of the minority class. However, test series have shown that downsampled training sets result in poor performance scores of the classifiers. It is assumed that the reason is the already small dataset.
 \begin{wrapfigure}{r}{0.6\textwidth}
@@ -30,7 +30,7 @@ The train set can be downbalanced by shrinking the majority class to the size of
 	\label{img:roc}
 \end{wrapfigure}
 %But since the dataset is already small after the preprocessing, the downsampling worsens the classifiers.
-In order to avoid shrinking the dataset even further upsampling can be applied to increase the minority class of the train set to the size of the majority class. This sampling method improved the performance of some of the classifiers as seen in \ref{img:classifiers}.
+In order to avoid shrinking the dataset even further upsampling can be applied to increase the minority class of the train set to the size of the majority class. This sampling method improved the performance of some of the classifiers as seen in figure\ref{img:classifiers}.
 
 The performance of the classifiers can be seen in the ROC curve in figure \ref{img:roc}. The scored F1 values with the selected hyperparameters can be found at figure \ref{img:classifiers}.
 In the following section the two best performing classifiers - kNN and SVC - are examined in more detail.
