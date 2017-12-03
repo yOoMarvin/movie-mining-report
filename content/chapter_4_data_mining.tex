@@ -3,16 +3,17 @@
 \chapter{Data Mining}\label{cha:data_mining}
 \endgroup
 
+\section{Data Mining and Evaluation}
 After preprocessing the data, the next step is to build a classifier to predict the success of a movie. To find the best classifier a set of different algorithms is evaluated:
 K-nearest neighbor (kNN), 
 na\"{i}ve bayes, 
 support vector classifier (SVC), 
-neural net, 
 decision tree and 
 random forest.
 
+
 The first goal of the analysis was to predict the success in four different classes. Since an analysis in that detail with the given dataset is very unprecise, a binary classifier was created.
-For all of the named algorithms an individual feature selection is applied to get the best results. The important features are selected by a greedy feature wrapper. This feature wrapper starts with the full set of features and drops features as long as the result improves. The results are checked with a stratified 10-fold cross-validation. Additionally to the selection of features, thresholding for features like the number of actors and number of production companies can be applied. For example actors, directors and companies, which are not frequently participating in the movie-production-scene can be eliminated. Thus it can be assured that only columns are taken into account which are contained in a reasonable amount of movies, and therefore have an impact on the classifier. \\
+For all of the named algorithms an individual feature selection is applied to get the best results. The important features are selected by a greedy feature wrapper. This feature wrapper starts with the full set of features and drops features as long as the result improves. The results are checked with a stratified 10-fold cross-validation. Additionally to the selection of features, thresholding for features like the minimum number of actors and number of production companies can be applied. For example actors, directors and companies, which are not frequently participating in the movie-production-scene can be eliminated. Thus it can be assured that only columns are taken into account which are contained in a reasonable amount of movies, and therefore have an impact on the classifier. \\
 In the next step some hyperparameter tuning is needed to improve the classifiers. To find the best parameter setting, a grid search in combination with a stratified 10-fold cross-validation, scoring the highest F1-score (macro), is applied to the classifiers.
 %The achieved F1-scores of the three best binary classifier are listed in table \ref{tab:binary_classifier}. 
 
@@ -24,8 +25,8 @@ Consequently, the stratified cross-validation is extended with an optional argum
 %For further improvement
 The train set can be downbalanced by shrinking the majority class to the size of the minority class. However, test series have shown that downsampled training sets result in poor performance scores of the classifiers. It is assumed that the reason is the already small dataset.
 %But since the dataset is already small after the preprocessing, the downsampling worsens the classifiers.
-In order to avoid shrinking the dataset even further upsampling can be applied to increase the minority class of the train set to the size of the majority class. However, also this sampling technique showed a decrease in performance.
-The performance of the classifiers can be seen in the ROC curve in figure \ref{img:roc}.
+In order to avoid shrinking the dataset even further upsampling can be applied to increase the minority class of the train set to the size of the majority class. This sampling method improved the performance of some of the classifiers as seen in \ref{img:classifiers}.
+The performance of the classifiers can be seen in the ROC curve in figure \ref{img:roc}. The scored F1 values with the selected hyperparameters can be found at figure \ref{img:classifiers}.
 In the following section the two best performing classifiers - kNN and SVC - are examined in more detail.
 \begin{figure}[h]
 	\center
@@ -33,8 +34,6 @@ In the following section the two best performing classifiers - kNN and SVC - are
 	\caption{Macro average ROC curves for all classifiers}
 	\label{img:roc}
 \end{figure}
-
-
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 %% \usepackage{graphicx}
@@ -55,12 +54,11 @@ In the following section the two best performing classifiers - kNN and SVC - are
 %\label{my-label}
 %\end{table}
 
-\section {Classifiers}
+%\section {Classifiers}
 \paragraph{K nearest neighbor}
-After preprocessing the dataset is highly dimensional with more than 50,000 columns. Even though kNN does not work very well on a high dimensional dataset, the algorithm is best performing with a reasonable feature selection. After dropping the \textit{actors}, \textit{country}, \textit{genre} and \textit{quarter} information and limiting the \textit{director} and the \textit{companies} to the ones that took part at at least three movies of the dataset, the classifier scores an F1 score of 61.4\%. The algorithm is comparing the labels of the 16 nearest neighbors calculated with the euclidean distance. Both down- and upsampling worsens the classifier. 
-
+After preprocessing the dataset is highly dimensional with more than 50,000 columns. Even though kNN does not work very well on a high dimensional dataset, the algorithm is best performing with a reasonable feature selection. After dropping the \textit{actors}, \textit{country}, \textit{genre} and \textit{quarter} information and limiting the \textit{director} and the \textit{companies} to the ones that took part at at least three movies of the dataset, the classifier scores an F1 score of 60.5\%. The algorithm is comparing the labels of the 16 nearest neighbors calculated with the euclidean distance. Both down- and upsampling worsens the classifier. 
 \paragraph{Support vector classifier}
-As the kNN the support vector classifier works best after dropping a lot of features. Without any information to the actors, country, quarter, genre and age limitation and limiting the companies and directors to the ones that took part at at least three movies, the classifier scores an F1 score of 60.7\%. For the best result the algorithm works with a linear kernel and a balanced class weight. Both down- and upsampling worsens the classifier.
+As the kNN the support vector classifier works best after dropping a lot of features. Without any information to the actors, country, quarter, genre and age limitation and limiting the companies and directors to the ones that took part at at least three movies, the classifier scores an F1 score of 60.2\%. For the best result the algorithm works with a linear kernel and a balanced class weight. Upsampling improves the classifier.
 \\ \\
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{images/Classifier.png}
@@ -75,18 +73,28 @@ As the kNN the support vector classifier works best after dropping a lot of feat
 
 %\paragraph{Random Forest}
 %Like the decision tree, random forest builds  a hierarchical structure, which can handle unbalanced datasets better than other algorithms. In addition it corrects the overfitting habit of a decision tree. In the gridsearch hyperparameters like the split-criterion, number of features, the minimum sample to split and whether bootstrap samples are used or not are evaluated. After dropping the actors and the release quarter, the classifier scores a F1 score of 59\%. As with the decision tree neither down- nor upsampling the train set improves the result.
-\section{Evaluation and Prospect}
-\paragraph{Evaluation}
+\section{Interpretation and Prospect}
+\paragraph{Interpretation}
+As discovered in the previous paragraphs, some classifiers perform better than others. One reason can be seen in the amount of data in the dataset. The final dataset of about 3,900 rows can be considered as small. Therefore, as shown in the ROC curves above, decision tree and random forest are not performing as well as kNN and SVC. %The tree structures work well with the issue of an unbalanced dataset as the given one, since the hierarchical structure allows them to learn signals from both classes.
 
-\label{cha:prospect}
+Filtering the actors, directors and companies to the most common ones with the thresholds given in \ref{img:classifiers}, leads to a good results for all classifiers.
 
-As discovered in the previous paragraphs, some classifiers perform better than others. One reason can be seen in the amount of data in the dataset. The final dataset of about 3,900 rows can be considered as small. Therefore, as shown in the ROC curves above, decision tree and random forest are not performing as well as kNN and SVC. Trees usually rely on large datasets, where they can evaluate data more efficiently. The random forest however, performs better since it takes knowledge from various trees inside the forest into account.
+During the feature selection some points could be discovered: Four out of five classifiers dropped the actors. 
+This might be caused by the fact that actors do either not have a significant impact on the movies success, or the extracted data in the used set is not meaningful enough yet. 
+However, directors seem to have more impact on the overall result. Only two out of five classifier dropped this feature. A conclusion could be that directors seem to have a bigger impact on the movies success compared to actors. 
+More detailed analysis for the actors and directors can be investigated in future research.
 
-Other classifiers as for example na\"{i}ve bayes do not perform well as the trees. One possible reason could be that na\"{i}ve bayes assumes that no correlation between the features exist. In order to improve this classifier more research needs to be investigated to determine correlation between features.
-%However, in this specific task movies with more famous actors usually generate a bigger budget. 
+The structure of the decision tree shows that budget and year are the most important features for this classifier. The structure itself is very complex and deep which is caused by the complex task in this classification. 
+Further exploration on the SVC classifier provides insights on the distribution of the features. 
+The coefficient weights show that most impact is caused by the \textit{company}, followed by the \textit{directors}. Further it seems that especially the language thai seems to have a negative impact on the success of a movie.
 
-Best scores are reached with the kNN and the SVC. The kNN classifier works best with values close to the training example, as it calculates the distance between the features. An object itself is than classified by the majority votes of each neighbor.
-SVCs bring best results if there are various training examples with a known distribution. Both are applied best to the given dataset and therefore perform most reliable.
+  %Trees usually rely on large datasets, where they can evaluate data more efficiently. The random forest however, performs better since it takes knowledge from various trees inside the forest into account.
+%
+%Other classifiers as for example na\"{i}ve bayes do not perform well as the trees. One possible reason could be that na\"{i}ve bayes assumes that no correlation between the features exist. In order to improve this classifier more research needs to be investigated to determine correlation between features.
+%%However, in this specific task movies with more famous actors usually generate a bigger budget. 
+%
+%Best scores are reached with the kNN and the SVC. The kNN classifier works best with values close to the training example, as it calculates the distance between the features. An object itself is than classified by the majority votes of each neighbor.
+%SVCs bring best results if there are various training examples with a known distribution. Both are applied best to the given dataset and therefore perform most reliable.
 
 
 
