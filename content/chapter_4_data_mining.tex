@@ -60,13 +60,12 @@ In the following section the two best performing classifiers - kNN and SVC - are
 	\begin{tabular}{ | p{2,5cm} | p{2,5cm} | p{2.5cm} | p{3cm}|}
     \hline
     & kNN & SVC & na\"{i}ve bayes\\ \hline
-	thresholds & actor: 8 company:3 director:3 & actor: 8 company: 3 director: 3 & no threshold \\  \hline
+	thresholds & actor: 8 company: 3 director: 3 & actor: 8 company: 3 director: 3 & no threshold \\  \hline
     Columns dropped & actor\_, quarter\_, genre\_, country\_, runtime, adult & quarter\_, adult, actor\_, director\_ & country\_, genre\_, runtime, adult, actor\_, director\_  \\ \hline
     hyperparameter & algorithm= auto, metric= euclidean, neighbors= 16, p= 2, weights= uniform & class\_weight= balanced, 'multi\_class= ovr & no parameters  \\ \hline
     Precison&  &  &  \\ \hline
 	recall &  &  &   \\ \hline
 	F1(macro) & 0,6141 & 0,6069 & 0,5777 \\ \hline
-    
     \end{tabular}
     \caption{Results overview} 
    \label{tab:values}
